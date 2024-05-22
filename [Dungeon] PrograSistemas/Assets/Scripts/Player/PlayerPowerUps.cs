@@ -10,7 +10,7 @@ public class PlayerPowerUps : MonoBehaviour
 {
     public GameObject shieldPrefab; //Prefab del escudo
     private ShieldPowerUp shieldPowerUp; //Script del powerUp de escudo
-    public bool isShieldActive; //Bool si está activo el escudo
+    public bool isShieldActive; //Bool si estï¿½ activo el escudo
     
     private TDA_Queue tdaQueue; //Script de la lista de power ups
     private GameObject powerUp; //Objeto de la lista de power ups
@@ -19,7 +19,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     private PlayerShoot playerShoot; //Script que le permite al player disparar
 
-    private CapsuleCollider2D playerCollider; //Collider del player (Cápsula)
+    private CapsuleCollider2D playerCollider; //Collider del player (Cï¿½psula)
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +68,7 @@ public class PlayerPowerUps : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("PowerUp")) // Si el jugador colisiona con un enemigo y puede tomar daño
+        if (other.CompareTag("PowerUp"))
         {
             tdaQueue.AddPowerUp(other.GameObject());
         }

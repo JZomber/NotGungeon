@@ -4966,6 +4966,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FastShoot
       objectReference: {fileID: 0}
+    - target: {fileID: 5492140727637136066, guid: db60e5ef563aef34793897ec91cf3b19, type: 3}
+      propertyPath: m_TagString
+      value: PowerUp
+      objectReference: {fileID: 0}
     - target: {fileID: 6159645645880683076, guid: db60e5ef563aef34793897ec91cf3b19, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.250003
@@ -5755,6 +5759,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shield
       objectReference: {fileID: 0}
+    - target: {fileID: 488213115397630172, guid: 72cc6e64d51b85e4b92f2d199fce2fd1, type: 3}
+      propertyPath: m_TagString
+      value: PowerUp
+      objectReference: {fileID: 0}
     - target: {fileID: 8580095905019467314, guid: 72cc6e64d51b85e4b92f2d199fce2fd1, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -6145,6 +6153,10 @@ PrefabInstance:
     - target: {fileID: 6467638416760254932, guid: 305029bb3e9ebbb4d9240883ec1f6c8c, type: 3}
       propertyPath: m_Name
       value: HealthUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6467638416760254932, guid: 305029bb3e9ebbb4d9240883ec1f6c8c, type: 3}
+      propertyPath: m_TagString
+      value: PowerUp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 305029bb3e9ebbb4d9240883ec1f6c8c, type: 3}
@@ -8062,7 +8074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2097070431
 Transform:
   m_ObjectHideFlags: 0
@@ -11017,6 +11029,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FastShoot
       objectReference: {fileID: 0}
+    - target: {fileID: 5492140727637136066, guid: db60e5ef563aef34793897ec91cf3b19, type: 3}
+      propertyPath: m_TagString
+      value: PowerUp
+      objectReference: {fileID: 0}
     - target: {fileID: 6159645645880683076, guid: db60e5ef563aef34793897ec91cf3b19, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -11130,6 +11146,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1431534938}
+    - target: {fileID: 6379265234640369316, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1495420261
+      objectReference: {fileID: 0}
     - target: {fileID: 6512463128250839290, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
       propertyPath: player
       value: 
@@ -11191,6 +11211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthUp
       objectReference: {fileID: 0}
+    - target: {fileID: 6467638416760254932, guid: 305029bb3e9ebbb4d9240883ec1f6c8c, type: 3}
+      propertyPath: m_TagString
+      value: PowerUp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 305029bb3e9ebbb4d9240883ec1f6c8c, type: 3}
 --- !u!1001 &5538237576269905715
@@ -11203,6 +11227,10 @@ PrefabInstance:
     - target: {fileID: 488213115397630172, guid: 72cc6e64d51b85e4b92f2d199fce2fd1, type: 3}
       propertyPath: m_Name
       value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: 488213115397630172, guid: 72cc6e64d51b85e4b92f2d199fce2fd1, type: 3}
+      propertyPath: m_TagString
+      value: PowerUp
       objectReference: {fileID: 0}
     - target: {fileID: 8580095905019467314, guid: 72cc6e64d51b85e4b92f2d199fce2fd1, type: 3}
       propertyPath: m_RootOrder
