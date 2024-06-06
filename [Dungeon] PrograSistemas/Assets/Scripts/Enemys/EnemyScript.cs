@@ -27,7 +27,7 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         LevelManager = FindObjectOfType<LevelManager>();
-        enemyMage = FindObjectOfType<EnemyMage>();
+        //enemyMage = FindObjectOfType<EnemyMage>();
         capsuleCollider2D = GetComponent<CapsuleCollider2D>();
         capsuleCollider2D.isTrigger = false;
         animator = GetComponent<Animator>();
@@ -54,7 +54,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    // Daño del Enemigo
+    // Daï¿½o del Enemigo
     public void EnemyDamage(float damage)
     {
         currentHealth -= damage;
@@ -73,8 +73,8 @@ public class EnemyScript : MonoBehaviour
                 StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
             }
             
-            enemyMage.deadEnemies++;
-            Debug.Log("MAGO CALLED");
+            //enemyMage.deadEnemies++;
+            //Debug.Log("MAGO CALLED");
         }
     }
 
@@ -95,7 +95,7 @@ public class EnemyScript : MonoBehaviour
                 StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
             }
 
-            enemyMage.deadEnemies++;
+            //enemyMage.deadEnemies++;
         }
     }
 
