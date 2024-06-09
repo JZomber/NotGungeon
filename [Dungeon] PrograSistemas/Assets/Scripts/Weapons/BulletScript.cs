@@ -18,7 +18,13 @@ namespace Weapons
         {
             rb = GetComponent<Rigidbody2D>();
             rb.velocity = transform.up * speed;
-            Destroy(gameObject, 3);
+            Invoke("DisableItself", 3f);
+            //Destroy(gameObject, 3);
+        }
+
+        private void Update()
+        {
+            rb.velocity = transform.up * speed;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -30,7 +36,7 @@ namespace Weapons
                 if (enemy != null)
                 {
                     enemy.EnemyDamage(20);
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
                 }
             }
 
@@ -38,13 +44,23 @@ namespace Weapons
             {
                 var shield = collision.gameObject.GetComponent<ShieldPowerUp>();
                 shield.damageResist -= 1;
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
 
-            if (collision.CompareTag("Wall") || !targetEnemy && collision.CompareTag("Player")) //Colisión con una pared o player
+            if (!targetEnemy && collision.CompareTag("Player")) //Colisión con una pared o player
             {
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
+
+            if (collision.CompareTag("Wall"))
+            {
+                gameObject.SetActive(false);
+            }
+        }
+
+        void DisableItself() 
+        {
+            gameObject.SetActive(false);
         }
     }
 }

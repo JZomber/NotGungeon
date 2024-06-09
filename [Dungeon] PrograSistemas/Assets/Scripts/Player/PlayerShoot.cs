@@ -7,14 +7,22 @@ using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public Transform shootingOrig; //Origen de las balas
-    public GameObject bulletPrefab; //Prefab de las balas (player)
-    public GameObject weapon;
+    [SerializeField] Transform shootingOrig; //Origen de las balas
+    [SerializeField] GameObject bulletPrefab; //Prefab de las balas (player)
+    [SerializeField] GameObject weapon;
+    WeaponScript weaponScript;
+
 
     public bool isPowerActive; //Poder de disparo
     private float timePowerUp = 6f; //Duración del power up
 
     public bool canShoot = true;
+    
+
+    private void Start()
+    {
+        weaponScript = weapon.GetComponent<WeaponScript>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -34,7 +42,11 @@ public class PlayerShoot : MonoBehaviour
         
         if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
         {
-            StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
+            if (weaponScript != null) 
+            {
+                weaponScript.Shoot(shootingOrig);
+            }
+            //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
         }
         
         if (!canShoot)

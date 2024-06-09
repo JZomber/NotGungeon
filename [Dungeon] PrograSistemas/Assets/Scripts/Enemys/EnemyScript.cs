@@ -72,9 +72,13 @@ public class EnemyScript : MonoBehaviour
                 rangedEnemy.isWeaponActive = false;
                 StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
             }
+
+            if (enemyMage != null) 
+            {
+                enemyMage.deadEnemies++;
+                Debug.Log("MAGO CALLED");
+            }
             
-            enemyMage.deadEnemies++;
-            Debug.Log("MAGO CALLED");
         }
     }
 
