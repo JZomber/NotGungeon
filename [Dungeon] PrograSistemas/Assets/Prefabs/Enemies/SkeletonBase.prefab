@@ -244,9 +244,17 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 6813736100987874697, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+    - target: {fileID: 2238500039648442328, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2238500039648442328, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: b212596c2c33b0e489dd1d11bd86b39f, type: 2}
     - target: {fileID: 4397660984528788353, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
       propertyPath: m_Name
-      value: BasicPistol
+      value: EnemyGun
       objectReference: {fileID: 0}
     - target: {fileID: 6844201568584190483, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
       propertyPath: m_LocalPosition.x

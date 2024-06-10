@@ -202,6 +202,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonBase (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 2166344080535877053, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: b212596c2c33b0e489dd1d11bd86b39f, type: 2}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.75
@@ -301,6 +305,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonBase (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 2166344080535877053, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: b212596c2c33b0e489dd1d11bd86b39f, type: 2}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -2004,6 +2012,10 @@ PrefabInstance:
     - target: {fileID: 706128051973422528, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_Name
       value: SkeletonBase (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2166344080535877053, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_RootOrder
@@ -5183,6 +5195,10 @@ PrefabInstance:
     - target: {fileID: 706128051973422528, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_Name
       value: SkeletonBase (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2166344080535877053, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_RootOrder
@@ -14674,6 +14690,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkeletonBase (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2166344080535877053, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e0ec456ae49c47498b8424c0d399868, type: 2}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -14905,6 +14925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1421395810}
     m_Modifications:
+    - target: {fileID: 1820554443855235954, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1829765835}
     - target: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
       propertyPath: m_Name
       value: PlayerRogue
@@ -14949,6 +14973,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8351198990036626136, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+      propertyPath: weaponData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e0ec456ae49c47498b8424c0d399868, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
 --- !u!4 &1565893357 stripped
@@ -16823,6 +16851,11 @@ PrefabInstance:
       objectReference: {fileID: 1660228806}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00fe8620df8af65409c20f35ff337835, type: 3}
+--- !u!1 &1829765835 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5904911308614289025, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+  m_PrefabInstance: {fileID: 1565893356}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1855119527
 GameObject:
   m_ObjectHideFlags: 0
