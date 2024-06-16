@@ -27,9 +27,16 @@ namespace Weapons
             {
                 EnemyScript enemy = collision.GetComponent<EnemyScript>();
 
+                EnemyMage enemyMage = collision.GetComponent<EnemyMage>();
+
                 if (enemy != null)
                 {
                     enemy.EnemyDamage(20);
+                    Destroy(gameObject);
+                }
+                else if (enemyMage != null)
+                {
+                    enemyMage.EnemyDamage(20);
                     Destroy(gameObject);
                 }
             }
@@ -41,7 +48,7 @@ namespace Weapons
                 Destroy(gameObject);
             }
 
-            if (collision.CompareTag("Wall") || !targetEnemy && collision.CompareTag("Player")) //Colisión con una pared o player
+            if (collision.CompareTag("Wall") || !targetEnemy && collision.CompareTag("Player")) //ColisiÃ³n con una pared o player
             {
                 Destroy(gameObject);
             }
