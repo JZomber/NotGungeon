@@ -57,12 +57,10 @@ public class PlayerPowerUps : MonoBehaviour
             tdaQueue.RemovePowerUp(); //Quito el objeto del TDA Cola
         }
 
-        if (shieldPowerUp.damageResist <= 0) //Si la resistencia del escudo termina
+        if (!shieldPrefab.activeInHierarchy) //Si la resistencia del escudo termina
         {
             isShieldActive = false;
             playerCollider.enabled = true;
-            shieldPowerUp.damageResist = 5;
-            shieldPrefab.SetActive(false);
         }
     }
     

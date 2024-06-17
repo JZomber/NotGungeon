@@ -5,13 +5,21 @@ namespace PowerUps
 { 
     public class ShieldPowerUp : MonoBehaviour
     {
-        public int damageResist = 5;
-        
-        private void Update()
+        [SerializeField] private int damageResist = 5;
+        private int currentResistance;
+
+        private void Start()
         {
-            if (damageResist <= 0)
+            currentResistance = damageResist;
+        }
+
+        public void TakeDamage(int dmg)
+        {
+            currentResistance--;
+            
+            if (currentResistance <= 0)
             {
-                this.gameObject.SetActive(false);
+                gameObject.SetActive(false);
             }
         }
 
@@ -19,8 +27,8 @@ namespace PowerUps
         {
             if (other.CompareTag("Enemy"))
             {
-                damageResist = 0;
-                this.gameObject.SetActive(false);
+                currentResistance = 0;
+                gameObject.SetActive(false);
             }
         }
     }

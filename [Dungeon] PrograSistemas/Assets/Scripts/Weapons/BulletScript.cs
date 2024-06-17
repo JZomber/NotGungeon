@@ -41,10 +41,15 @@ namespace Weapons
                 }
             }
 
+            if (targetEnemy && collision.CompareTag("EnemyShield"))
+            {
+                Destroy(gameObject);
+            }
+
             if (!targetEnemy && collision.CompareTag("Shield")) //Si la bala colisiona con un escudo y Enemy no es objetivo
             {
                 var shield = collision.gameObject.GetComponent<ShieldPowerUp>();
-                shield.damageResist -= 1;
+                shield.TakeDamage(1);
                 Destroy(gameObject);
             }
 

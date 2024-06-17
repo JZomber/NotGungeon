@@ -68,7 +68,6 @@ public class EnemyScript : MonoBehaviour
             if (OnEnemyKilled != null)
             {
                 OnEnemyKilled(this.GameObject());
-                Debug.Log("EVENT");
             }
             
             if (isRangedEnemy)

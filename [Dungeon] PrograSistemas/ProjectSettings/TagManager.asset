@@ -17,7 +17,7 @@ TagManager:
   - TpCollider
   - Victory
   - Wall
-  - EnemyMage
+  - EnemyShield
   layers:
   - Default
   - TransparentFX
