@@ -25,7 +25,13 @@ public class WeaponScript : MonoBehaviour,IGun
     {
         if (!isShooting) // Solo disparar si no se está disparando actualmente
         {
-            if (weaponData.GetRoundsBullets > 0)
+            
+
+            if (weaponData.GetBulletsPerShoot > 1) 
+            {
+                ShootShotgun(orig);
+            }
+            else if (weaponData.GetRoundsBullets > 0)
             {
                 StartCoroutine(ShootSmg(weaponData.GetCadency, orig));
             }
@@ -40,6 +46,38 @@ public class WeaponScript : MonoBehaviour,IGun
                 }
             }
         }
+    }
+
+    public void ShootShotgun(Transform orig)
+    {
+        if (!isShooting) // Solo disparar si no se está disparando actualmente
+        {
+            StartCoroutine(ShootShotgunCoroutine(orig));
+        }
+    }
+
+    private IEnumerator ShootShotgunCoroutine(Transform orig)
+    {
+        isShooting = true; // Establecer la bandera a true para indicar que está disparando
+
+        float angleStep = weaponData.GetSpreadAngle / (weaponData.GetBulletsPerShoot - 1);
+        float angle = -weaponData.GetSpreadAngle / 2;
+
+        for (int i = 0; i < weaponData.GetBulletsPerShoot; i++)
+        {
+            GameObject bullet = GetPooledBullet();
+            if (bullet != null)
+            {
+                bullet.transform.position = orig.position;
+                bullet.transform.rotation = orig.rotation * Quaternion.Euler(0, 0, angle - 90);
+                bullet.SetActive(true);
+            }
+            angle += angleStep;
+        }
+
+        yield return new WaitForSeconds(weaponData.GetCadency); // Espera para la cadencia de disparo
+
+        isShooting = false; // Restablecer la bandera a false para indicar que ha terminado de disparar
     }
 
     private GameObject GetPooledBullet()
