@@ -23,6 +23,11 @@ public class MenuManager : MonoBehaviour
         StartCoroutine(TutorialLevel("Tutorial"));
     }
     
+    public void LoadSecretLevel()
+    {
+        StartCoroutine(SecretLevel("Rooms"));
+    }
+    
     IEnumerator MenuScreen(string str) //Carga la pantalla "Men�"
     {
         transition.SetTrigger("Start");
@@ -42,6 +47,15 @@ public class MenuManager : MonoBehaviour
     }
 
     IEnumerator TutorialLevel(string str)
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+        
+        SceneManager.LoadScene(str);
+    }
+    
+    IEnumerator SecretLevel(string str)
     {
         transition.SetTrigger("Start");
 
