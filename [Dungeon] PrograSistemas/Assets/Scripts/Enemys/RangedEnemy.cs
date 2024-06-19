@@ -51,7 +51,11 @@ public class RangedEnemy : MonoBehaviour
             
             for (int i = 0; i < shootingOrig.Length; i++)
             {
-                weaponScript.Shoot(shootingOrig[i]);
+                if (weaponScript != null) 
+                {
+                    weaponScript.Shoot(shootingOrig[i]);
+                }
+               
                 
             }
             

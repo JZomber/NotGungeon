@@ -18,9 +18,13 @@ namespace Weapons
         {
             rb = GetComponent<Rigidbody2D>();
             rb.velocity = transform.up * speed;
-            Destroy(gameObject, 3);
+            //Invoke("Deactive", 3f);
         }
 
+        private void Update()
+        {
+            rb.velocity = transform.up * speed;
+        }
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (targetEnemy && collision.CompareTag("Enemy")) //Si la bala colisiona Enemy y es un objetivo del mismo
@@ -32,31 +36,37 @@ namespace Weapons
                 if (enemy != null)
                 {
                     enemy.EnemyDamage(20);
-                    Destroy(gameObject);
+                    Deactive();
                 }
                 else if (enemyMage != null)
                 {
                     enemyMage.EnemyDamage(20);
-                    Destroy(gameObject);
+                    Deactive();
                 }
             }
 
             if (targetEnemy && collision.CompareTag("EnemyShield"))
             {
-                Destroy(gameObject);
+                Deactive();
             }
 
             if (!targetEnemy && collision.CompareTag("Shield")) //Si la bala colisiona con un escudo y Enemy no es objetivo
             {
                 var shield = collision.gameObject.GetComponent<ShieldPowerUp>();
                 shield.TakeDamage(1);
-                Destroy(gameObject);
+                Deactive();
             }
 
             if (collision.CompareTag("Wall") || !targetEnemy && collision.CompareTag("Player")) //Colisión con una pared o player
             {
-                Destroy(gameObject);
+                Deactive();
             }
         }
+        void Deactive()
+        {
+            gameObject.SetActive(false);
+        }
     }
+
+    
 }
