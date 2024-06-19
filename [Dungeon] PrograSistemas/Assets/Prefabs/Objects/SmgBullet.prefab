@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 3124188286109591170}
   - component: {fileID: 6665018341010123724}
   m_Layer: 0
-  m_Name: EnemyBullet
-  m_TagString: EnemyBullet
+  m_Name: SmgBullet
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3469022813990914431}
-  m_LocalRotation: {x: 0, y: 0, z: -0.694074, w: 0.7199037}
-  m_LocalPosition: {x: -0.36525908, y: 0.14136124, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.9991712, w: 0.04070509}
+  m_LocalPosition: {x: -6.3038864, y: 58.91429, z: -0.045239463}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0.7137255, b: 0.7550383, a: 1}
+  m_Color: {r: 0.7122642, g: 0.9747084, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -148,5 +148,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a13d8664c0f2ce48ac558026c2970b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 13
-  targetEnemy: 0
+  speed: 20
+  targetEnemy: 1

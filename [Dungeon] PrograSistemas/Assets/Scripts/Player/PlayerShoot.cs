@@ -12,6 +12,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] GameObject weapon;
     WeaponScript weaponScript;
 
+    StopTime stopTime;
 
     public bool isPowerActive; //Poder de disparo
     private float timePowerUp = 6f; //Duración del power up
@@ -22,6 +23,12 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         weaponScript = weapon.GetComponent<WeaponScript>();
+        stopTime = GetComponent<StopTime>();
+
+        if (stopTime == null) 
+        {
+            return;
+        }
     }
 
     // Update is called once per frame
@@ -39,15 +46,36 @@ public class PlayerShoot : MonoBehaviour
                 //Debug.LogError("Power Shoot desactivado");
             }
         }
-        
-        if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
+
+        if (stopTime != null)
         {
-            if (weaponScript != null) 
+            if (!stopTime.GetPowerActive)
             {
-                weaponScript.Shoot(shootingOrig);
+                if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
+                {
+                    if (weaponScript != null)
+                    {
+                        weaponScript.Shoot(shootingOrig);
+                    }
+                    //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
+                }
             }
-            //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
+
         }
+        else 
+        {
+            if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
+            {
+                if (weaponScript != null)
+                {
+                    weaponScript.Shoot(shootingOrig);
+                }
+                //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
+            }
+        }
+        
+        
+        
         
         if (!canShoot)
         {

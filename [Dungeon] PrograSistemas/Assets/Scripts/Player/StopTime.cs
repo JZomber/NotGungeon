@@ -12,6 +12,9 @@ public class StopTime : MonoBehaviour
 
     private bool isCooldown = false; // Bandera para verificar si está en espera de incremento
 
+    private bool PowerActive = false;
+    public bool GetPowerActive => PowerActive;
+
     public GameObject powerIndicator; // Referencia al objeto de la UI que indica la disponibilidad del poder
 
     void Start()
@@ -38,6 +41,7 @@ public class StopTime : MonoBehaviour
 
     void StopTimeAction()
     {
+        PowerActive = true;
         Time.timeScale = 0; // Detener el tiempo
         currentUses--; // Reducir la cantidad de usos
         UpdatePowerIndicator(); // Actualizar el indicador UI
@@ -53,6 +57,7 @@ public class StopTime : MonoBehaviour
     void ResumeTime()
     {
         Time.timeScale = 1; // Reanudar el tiempo
+        PowerActive = false;
     }
 
     IEnumerator CooldownCoroutine()

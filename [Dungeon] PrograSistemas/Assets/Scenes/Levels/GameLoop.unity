@@ -15088,6 +15088,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1421395810}
     m_Modifications:
+    - target: {fileID: 59550346868365923, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+      propertyPath: powerIndicator
+      value: 
+      objectReference: {fileID: 1333035345}
     - target: {fileID: 1820554443855235954, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
       propertyPath: gun
       value: 
@@ -15139,7 +15143,7 @@ PrefabInstance:
     - target: {fileID: 8351198990036626136, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
       propertyPath: weaponData
       value: 
-      objectReference: {fileID: 11400000, guid: 37b6bb05498f6b3459784c9a30e0238a, type: 2}
+      objectReference: {fileID: 11400000, guid: 7e0ec456ae49c47498b8424c0d399868, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
 --- !u!4 &1565893357 stripped
@@ -15152,22 +15156,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
   m_PrefabInstance: {fileID: 1565893356}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1565893367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1565893358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ffe8b30bd669fa4595594b03d077689, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeControlKey: 113
-  maxUses: 1
-  cooldownTime: 5
-  powerIndicator: {fileID: 1333035345}
 --- !u!1 &1567415544
 GameObject:
   m_ObjectHideFlags: 0

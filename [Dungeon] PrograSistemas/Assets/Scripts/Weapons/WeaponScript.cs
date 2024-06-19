@@ -5,9 +5,10 @@ using UnityEngine;
 public class WeaponScript : MonoBehaviour,IGun
 {
     [SerializeField] WeaponData weaponData;
-    //[SerializeField] SpriteRenderer spriteRenderer;
     List<GameObject> bullets = new List<GameObject>();
     int poolSize = 3;
+
+    private bool isShooting = false; // Bandera para controlar el estado de disparo
 
     private void Start()
     {
@@ -19,24 +20,26 @@ public class WeaponScript : MonoBehaviour,IGun
             bullets.Add(bullet);
         }
     }
+
     public void Shoot(Transform orig)
     {
-        GameObject bullet = GetPooledBullet();
-        if (weaponData.GetRoundsBullets > 0)
+        if (!isShooting) // Solo disparar si no se está disparando actualmente
         {
-            StartCoroutine(ShootSmg(weaponData.GetCadency, orig));
-            
-        }
-        else 
-        {
-            if (bullet != null)
+            if (weaponData.GetRoundsBullets > 0)
             {
-                bullet.transform.position = orig.position;
-                bullet.transform.rotation = orig.rotation * Quaternion.Euler(0, 0, -90);
-                bullet.SetActive(true);
+                StartCoroutine(ShootSmg(weaponData.GetCadency, orig));
+            }
+            else
+            {
+                GameObject bullet = GetPooledBullet();
+                if (bullet != null)
+                {
+                    bullet.transform.position = orig.position;
+                    bullet.transform.rotation = orig.rotation * Quaternion.Euler(0, 0, -90);
+                    bullet.SetActive(true);
+                }
             }
         }
-        
     }
 
     private GameObject GetPooledBullet()
@@ -54,10 +57,11 @@ public class WeaponScript : MonoBehaviour,IGun
         return newBullet;
     }
 
-    private IEnumerator ShootSmg(float delay, Transform orig) 
+    private IEnumerator ShootSmg(float delay, Transform orig)
     {
+        isShooting = true; // Establecer la bandera a true para indicar que está disparando
 
-        for (int i = 0; i < weaponData.GetRoundsBullets; i++) //Cantidad de veces que disparará el arma (3 disparos - efecto ráfaga)
+        for (int i = 0; i < weaponData.GetRoundsBullets; i++) // Cantidad de veces que disparará el arma (3 disparos - efecto ráfaga)
         {
             GameObject bullet = GetPooledBullet();
             if (bullet != null)
@@ -68,7 +72,7 @@ public class WeaponScript : MonoBehaviour,IGun
             }
             yield return new WaitForSeconds(delay);
         }
+
+        isShooting = false; // Restablecer la bandera a false para indicar que ha terminado de disparar
     }
-
-
 }

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SmgData
   m_EditorClassIdentifier: 
   damage: 0
-  cadency: 0.2
+  cadency: 0.1
   roundsBullets: 3
-  bulletPrefab: {fileID: 3469022813990914431, guid: e34478b9c18b39645a6f5492dd70fc52, type: 3}
+  bulletPrefab: {fileID: 3469022813990914431, guid: 7215e46282495ab449dd234ef453cea3, type: 3}

@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 550388217809543280}
   - component: {fileID: 8826130604632612161}
   - component: {fileID: 8704498652214533481}
+  - component: {fileID: 59550346868365923}
   m_Layer: 0
   m_Name: PlayerRogue
   m_TagString: Player
@@ -212,6 +213,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &59550346868365923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705700512366788034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ffe8b30bd669fa4595594b03d077689, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeControlKey: 113
+  maxUses: 1
+  cooldownTime: 3
+  powerIndicator: {fileID: 0}
 --- !u!1 &4919538022471709382
 GameObject:
   m_ObjectHideFlags: 0
