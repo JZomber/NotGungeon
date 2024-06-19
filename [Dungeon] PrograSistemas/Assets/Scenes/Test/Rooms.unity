@@ -2770,6 +2770,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2541968437091760066, guid: 73f4b6214d33bcc4585ce3f251bfb622, type: 3}
   m_PrefabInstance: {fileID: 1334378306}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &415766224 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3677752269469037026, guid: 73f4b6214d33bcc4585ce3f251bfb622, type: 3}
+  m_PrefabInstance: {fileID: 1334378306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &431340301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8643,7 +8648,7 @@ PrefabInstance:
     - target: {fileID: 1530514618059069884, guid: 73f4b6214d33bcc4585ce3f251bfb622, type: 3}
       propertyPath: exits.Array.data[2].teleportPosition
       value: 
-      objectReference: {fileID: 1729653036}
+      objectReference: {fileID: 415766224}
     - target: {fileID: 4568074035709518023, guid: 73f4b6214d33bcc4585ce3f251bfb622, type: 3}
       propertyPath: m_IsActive
       value: 0
