@@ -17,7 +17,9 @@ public class LevelManager : MonoBehaviour
     private int totalWaypoints;
     private int indexWaypoint;
 
-    public Animator transition; //Transición entre escenas
+    public Animator transition; //Transiciï¿½n entre escenas
+
+    [SerializeField] private int killsRequired = 4;
 
     public int enemyCounter; //Enemigos elminados
     
@@ -42,7 +44,7 @@ public class LevelManager : MonoBehaviour
     {
         if (isGameLoop) //Si es un nivel de juego
         {
-            if (enemyCounter >= 4)
+            if (enemyCounter >= killsRequired)
             {
                 doors.SetActive(false);
             }

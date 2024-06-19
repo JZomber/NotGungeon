@@ -18,13 +18,7 @@ namespace Weapons
         {
             rb = GetComponent<Rigidbody2D>();
             rb.velocity = transform.up * speed;
-            Invoke("DisableItself", 3f);
-            //Destroy(gameObject, 3);
-        }
-
-        private void Update()
-        {
-            rb.velocity = transform.up * speed;
+            Destroy(gameObject, 3);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -33,34 +27,36 @@ namespace Weapons
             {
                 EnemyScript enemy = collision.GetComponent<EnemyScript>();
 
+                EnemyMage enemyMage = collision.GetComponent<EnemyMage>();
+
                 if (enemy != null)
                 {
                     enemy.EnemyDamage(20);
-                    gameObject.SetActive(false);
+                    Destroy(gameObject);
                 }
+                else if (enemyMage != null)
+                {
+                    enemyMage.EnemyDamage(20);
+                    Destroy(gameObject);
+                }
+            }
+
+            if (targetEnemy && collision.CompareTag("EnemyShield"))
+            {
+                Destroy(gameObject);
             }
 
             if (!targetEnemy && collision.CompareTag("Shield")) //Si la bala colisiona con un escudo y Enemy no es objetivo
             {
                 var shield = collision.gameObject.GetComponent<ShieldPowerUp>();
-                shield.damageResist -= 1;
-                gameObject.SetActive(false);
+                shield.TakeDamage(1);
+                Destroy(gameObject);
             }
 
-            if (!targetEnemy && collision.CompareTag("Player")) //Colisión con una pared o player
+            if (collision.CompareTag("Wall") || !targetEnemy && collision.CompareTag("Player")) //ColisiÃ³n con una pared o player
             {
-                gameObject.SetActive(false);
+                Destroy(gameObject);
             }
-
-            if (collision.CompareTag("Wall"))
-            {
-                gameObject.SetActive(false);
-            }
-        }
-
-        void DisableItself() 
-        {
-            gameObject.SetActive(false);
         }
     }
 }

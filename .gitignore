@@ -72,3 +72,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /\[Dungeon\] PrograSistemas/Library
 /\[Dungeon\] PrograSistemas/Temp
+/\[Dungeon\] PrograSistemas/Logs
