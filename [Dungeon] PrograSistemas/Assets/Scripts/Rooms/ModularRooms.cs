@@ -2,9 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 public class ModularRooms : MonoBehaviour
@@ -81,36 +84,30 @@ public class ModularRooms : MonoBehaviour
         {
             difficultyPoints = roomConfig.hardDiffPoints;
             Debug.Log($"SALA {this} | DIFICULTAD {selectedDifficulty} | PUNTOS {difficultyPoints}");
-            
+
             hardRoomDesign.SetActive(true);
             easyRoomDesign.SetActive(false);
         }
-    }
-
-    private void HandlerUpdateExits() //Utilizado para evitar llamadas al mismo frame que se actualiza el editor
-    {
-        EditorApplication.update -= HandlerUpdateExits;
-        UpdateExits();
     }
 
     private void UpdateExits()
     {
         foreach (Exit exit in exits)
         {
-            if (exit != null && exit.exitObject != null && exit.wallObject != null)
+            if (exit != null && exit.exitObject && exit.wallObject)
             {
                 exit.exitObject.SetActive(exit.available);
                 exit.wallObject.SetActive(!exit.available);
 
                 foreach (GameObject door in doorsList)
                 {
-                    if (door != null)
+                    if (door)
                     {
                         door.SetActive(!unlocked);
                     }
                 }
 
-                if (exit.teleportTrigger != null && exit.teleportPosition != null)
+                if (exit.teleportTrigger && exit.teleportPosition)
                 {
                     TeleportTrigger teleportTrigger = exit.teleportTrigger.GetComponent<TeleportTrigger>();
                     
@@ -120,6 +117,15 @@ public class ModularRooms : MonoBehaviour
         }
     }
     
+    #if UNITY_EDITOR
+    private void HandlerUpdateExits() //Utilizado para evitar llamadas al mismo frame que se actualiza el editor
+    {
+        EditorApplication.update -= HandlerUpdateExits;
+        UpdateExits();
+    }
+    #endif
+    
+    #if UNITY_EDITOR
     private void OnValidate()
     {
         if (!Application.isPlaying)
@@ -127,6 +133,7 @@ public class ModularRooms : MonoBehaviour
             EditorApplication.update += HandlerUpdateExits;
         }
     }
+    #endif
     
     [Serializable]
     public class Exit
