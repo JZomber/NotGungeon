@@ -7,7 +7,7 @@ public class RangedEnemy : MonoBehaviour
 {
     [SerializeField] private Transform[] shootingOrig; //Origen de las balas
     [SerializeField] private GameObject bulletPrefab; //Prefab de bullet (enemy)
-    private int totalShootOrigin; //Total de orígenes (depende del arma)
+    private int totalShootOrigin; //Total de orï¿½genes (depende del arma)
 
     private float coolDown;
     [SerializeField] private float shootCoolDown;
@@ -28,12 +28,12 @@ public class RangedEnemy : MonoBehaviour
         
         coolDown = shootCoolDown; //Cooldown entre disparos
 
-        totalShootOrigin = weapon.transform.childCount; //Obtengo el número de orígenes de balas
-        shootingOrig = new Transform[totalShootOrigin]; //Inicializo la lista según la cantidad
+        totalShootOrigin = weapon.transform.childCount; //Obtengo el nï¿½mero de orï¿½genes de balas
+        shootingOrig = new Transform[totalShootOrigin]; //Inicializo la lista segï¿½n la cantidad
 
         for (int i = 0; i < totalShootOrigin; i++)
         {
-            shootingOrig[i] = weapon.transform.GetChild(i).transform; //Obtengo la posición de cada origen
+            shootingOrig[i] = weapon.transform.GetChild(i).transform; //Obtengo la posiciï¿½n de cada origen
         }
         
     }
@@ -64,7 +64,7 @@ public class RangedEnemy : MonoBehaviour
 
     private IEnumerator ShootSMG(float delay)
     {
-        for (int i = 0; i < 3; i++) //Cantidad de veces que disparará el arma (3 disparos - efecto ráfaga)
+        for (int i = 0; i < 3; i++) //Cantidad de veces que dispararï¿½ el arma (3 disparos - efecto rï¿½faga)
         {
             yield return new WaitForSeconds(delay);
         
@@ -83,7 +83,12 @@ public class RangedEnemy : MonoBehaviour
         {
             weapon.GameObject().SetActive(false);
         }
-        else if (!canShoot && isWeaponActive)
+        
+        if (!canShoot && isWeaponActive)
+        {
+            weapon.GameObject().SetActive(true);
+        }
+        else if (canShoot && isWeaponActive)
         {
             weapon.GameObject().SetActive(true);
         }
