@@ -14,18 +14,13 @@ public class RangedEnemy : MonoBehaviour
 
     [SerializeField] private GameObject weapon; //Prefab del arma
     WeaponScript weaponScript;
-    private bool isSmg;
     public bool canShoot = true;
     public bool isWeaponActive = true;
 
 
     // Start is called before the first frame update
     void Start()
-    {
-        if (weapon.GameObject().name == "BasicSMG")
-        {
-            isSmg = true;
-        }
+    {       
         
         coolDown = shootCoolDown; //Cooldown entre disparos
 
