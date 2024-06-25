@@ -5,6 +5,8 @@ using UnityEngine;
 public class WeaponScript : MonoBehaviour,IGun
 {
     [SerializeField] WeaponData weaponData;
+    SpriteRenderer spriteRenderer;
+    AudioSource myAudio;
     List<GameObject> bullets = new List<GameObject>();
     int poolSize = 3;
 
@@ -19,6 +21,15 @@ public class WeaponScript : MonoBehaviour,IGun
             bullet.SetActive(false);
             bullets.Add(bullet);
         }
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        if (spriteRenderer == null) return;
+
+        myAudio = GetComponent<AudioSource>();
+
+        if (myAudio == null) return;
+
+        ChangeWeaponSprite();
     }
 
     public void Shoot(Transform orig)
@@ -37,12 +48,18 @@ public class WeaponScript : MonoBehaviour,IGun
             }
             else
             {
+
                 GameObject bullet = GetPooledBullet();
                 if (bullet != null)
                 {
                     bullet.transform.position = orig.position;
                     bullet.transform.rotation = orig.rotation * Quaternion.Euler(0, 0, -90);
                     bullet.SetActive(true);
+                }
+
+                if (myAudio != null)
+                {
+                    myAudio.PlayOneShot(weaponData.GetShotSound);
                 }
             }
         }
@@ -74,7 +91,10 @@ public class WeaponScript : MonoBehaviour,IGun
             }
             angle += angleStep;
         }
-
+        if (myAudio != null)
+        {
+            myAudio.PlayOneShot(weaponData.GetShotSound);
+        }
         yield return new WaitForSeconds(weaponData.GetCadency); // Espera para la cadencia de disparo
 
         isShooting = false; // Restablecer la bandera a false para indicar que ha terminado de disparar
@@ -108,9 +128,23 @@ public class WeaponScript : MonoBehaviour,IGun
                 bullet.transform.rotation = orig.rotation * Quaternion.Euler(0, 0, -90);
                 bullet.SetActive(true);
             }
+            if (myAudio != null) 
+            {
+                myAudio.PlayOneShot(weaponData.GetShotSound);
+            }
             yield return new WaitForSeconds(delay);
         }
 
         isShooting = false; // Restablecer la bandera a false para indicar que ha terminado de disparar
+    }
+
+    public void ChangeWeaponSprite() 
+    {
+    
+        if(spriteRenderer != null && weaponData != null) 
+        {
+            spriteRenderer.sprite = weaponData.GetWeaponSprite;
+        }
+
     }
 }

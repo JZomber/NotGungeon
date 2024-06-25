@@ -15100,6 +15100,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerRogue
       objectReference: {fileID: 0}
+    - target: {fileID: 5904911308614289025, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+      propertyPath: m_Name
+      value: Gun
+      objectReference: {fileID: 0}
     - target: {fileID: 6813736100987874697, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15140,10 +15144,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8351198990036626136, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
-      propertyPath: weaponData
-      value: 
-      objectReference: {fileID: 11400000, guid: 93f364733ba427641be82144d5c9df61, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
 --- !u!4 &1565893357 stripped
@@ -22812,6 +22812,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1735725308}
     m_Modifications:
+    - target: {fileID: 2127021208431210328, guid: bd2b1d403d3febd4ea5c63f6a51c0d29, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3165823312991784722, guid: bd2b1d403d3febd4ea5c63f6a51c0d29, type: 3}
       propertyPath: m_Name
       value: SkeletonSmg

@@ -12,11 +12,16 @@ public class WeaponData : ScriptableObject
     [SerializeField] float bulletsPerShoot;
     [SerializeField] float spreadAngle;
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] AudioClip shotSound;
+    [SerializeField] Sprite weaponSprite;
 
     public float GetBulletsPerShoot => bulletsPerShoot; // Número de balas por disparo (para escopetas)
     public float GetSpreadAngle => spreadAngle; // Ángulo de dispersión del arco de las balas
     public GameObject GetBulletPrefab => bulletPrefab;
     public float GetRoundsBullets => roundsBullets;
-
     public float GetCadency => cadency;
+     
+    public AudioClip GetShotSound => shotSound;
+    public Sprite GetWeaponSprite => weaponSprite;
+
 }

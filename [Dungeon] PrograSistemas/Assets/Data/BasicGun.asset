@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 0
   cadency: 0
+  roundsBullets: 0
+  bulletsPerShoot: 1
+  spreadAngle: 0
   bulletPrefab: {fileID: 3469022813990914431, guid: e34478b9c18b39645a6f5492dd70fc52, type: 3}
-  image: {fileID: 804962595, guid: b262285dc3e0b9d449989849b1f548fe, type: 3}
+  shotSound: {fileID: 8300000, guid: f55e70e600af6864ba98661cf5d8b1e2, type: 3}
+  weaponSprite: {fileID: 804962595, guid: b262285dc3e0b9d449989849b1f548fe, type: 3}

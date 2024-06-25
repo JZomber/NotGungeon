@@ -18,3 +18,5 @@ MonoBehaviour:
   bulletsPerShoot: 4
   spreadAngle: 20
   bulletPrefab: {fileID: 3469022813990914431, guid: e34478b9c18b39645a6f5492dd70fc52, type: 3}
+  shotSound: {fileID: 8300000, guid: 5ffc2e169fd0bbf4ebd77395c87b9ff0, type: 3}
+  weaponSprite: {fileID: 1926077066, guid: b262285dc3e0b9d449989849b1f548fe, type: 3}
