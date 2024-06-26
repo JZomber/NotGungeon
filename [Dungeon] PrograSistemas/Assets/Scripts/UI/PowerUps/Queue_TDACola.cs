@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace UI.PowerUps
 {
@@ -46,7 +47,7 @@ namespace UI.PowerUps
         {
             if (index == 0)
             {
-                throw new Exception("La cola esta vacia");
+                return cola[index];
             }
         
             return cola[index - 1];

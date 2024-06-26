@@ -53,7 +53,8 @@ public class LevelManager : MonoBehaviour
 
     public void TpWaypoint() //Posiciones a donde llevar al player cada vez que termina una sala
     {
-        player.transform.position = waypoints[indexWaypoint].transform.position;
+        player.transform.position = new Vector3(waypoints[indexWaypoint].transform.position.x, waypoints[indexWaypoint].transform.position.y,0);
+
         indexWaypoint++;
         enemyCounter = 0;
         doors.SetActive(true);

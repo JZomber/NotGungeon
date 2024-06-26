@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84954959462f2440b35ac650f2834de, type: 3}
+  m_Name: SmgData
+  m_EditorClassIdentifier: 
+  damage: 0
+  cadency: 0.1
+  roundsBullets: 3
+  bulletsPerShoot: 1
+  spreadAngle: 0
+  bulletPrefab: {fileID: 3469022813990914431, guid: 7215e46282495ab449dd234ef453cea3, type: 3}
+  shotSound: {fileID: 8300000, guid: 25df380368c3d644b87790cae99be885, type: 3}
+  reloadSound: {fileID: 8300000, guid: a848c2ae0bdfda946912541992f0deef, type: 3}
+  weaponSprite: {fileID: -1827147704, guid: b262285dc3e0b9d449989849b1f548fe, type: 3}

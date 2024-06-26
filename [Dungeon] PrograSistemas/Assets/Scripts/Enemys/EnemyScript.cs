@@ -81,24 +81,24 @@ public class EnemyScript : MonoBehaviour
         if (isAlive)
         {
             currentHealth -= damage;
-        }
-        
-        if (currentHealth <= 0)
-        {
-            isAlive = false;
-            capsuleCollider2D.enabled = false;
-            animator.SetTrigger("isDead");
-
-            if (OnEnemyKilled != null)
-            {
-                OnEnemyKilled(this.GameObject());
-            }
             
-            if (isRangedEnemy && gameObject.activeInHierarchy)
+            if (currentHealth <= 0)
             {
-                rangedEnemy.canShoot = false;
-                rangedEnemy.isWeaponActive = false;
-                StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
+                isAlive = false;
+                capsuleCollider2D.enabled = false;
+                animator.SetTrigger("isDead");
+
+                if (OnEnemyKilled != null)
+                {
+                    OnEnemyKilled(this.GameObject());
+                }
+            
+                if (isRangedEnemy && gameObject.activeInHierarchy)
+                {
+                    rangedEnemy.canShoot = false;
+                    rangedEnemy.isWeaponActive = false;
+                    StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
+                }
             }
         }
     }

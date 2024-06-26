@@ -31,8 +31,8 @@ public class PlayerMov : MonoBehaviour
             float inputX = Input.GetAxisRaw("Horizontal");
             float inputY = Input.GetAxisRaw("Vertical");
 
-            transform.position += new Vector3(inputX, inputY, 0) * (speedMov * Time.deltaTime);
-        
+            transform.position += new Vector3(inputX* speedMov * Time.deltaTime, inputY* speedMov * Time.deltaTime,0);
+            
             if (inputY > 0 || inputY < 0)
             {
                 animator.SetBool("isRunning", true); // Condición para la transición

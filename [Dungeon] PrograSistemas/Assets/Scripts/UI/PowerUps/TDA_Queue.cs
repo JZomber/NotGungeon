@@ -47,6 +47,7 @@ namespace UI.PowerUps
             GameObject firstPowerUp = powerUpsQueue.First(); //Obtengo la referencia al primer objeto en entrar
             currentPowerUp = firstPowerUp;
                 
+            
             for (int i = 0; i < powerUpsImg.Length; i++)
             {
                 if (firstPowerUp.name == powerUpsImg[i].name) //Comparo el nombre del objeto con el de las imágenes

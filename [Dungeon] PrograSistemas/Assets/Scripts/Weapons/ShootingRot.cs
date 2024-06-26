@@ -9,12 +9,16 @@ namespace Weapons
         private Vector3 mousePos;
 
         private GameObject target;
-        public GameObject user;
+        [SerializeField] GameObject user;
+       
+
         void Start()
         {
             mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         
             target = GameObject.FindGameObjectWithTag("Player");
+
+            
         }
 
         void Update()
@@ -25,6 +29,7 @@ namespace Weapons
                 Vector3 rotation = mousePos - transform.position;
                 float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0, 0, rotZ);
+                
             }
             else if (user.CompareTag("Enemy"))
             {
@@ -33,6 +38,8 @@ namespace Weapons
                 transform.rotation = Quaternion.Euler(0, 0, rotZ);
             }
         }
+
+        
 
     }
 }
