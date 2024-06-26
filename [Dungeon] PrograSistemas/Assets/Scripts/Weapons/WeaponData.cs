@@ -11,8 +11,8 @@ public class WeaponData : ScriptableObject
     [SerializeField] float roundsBullets;
     [SerializeField] float bulletsPerShoot;
     [SerializeField] float spreadAngle;
-    [SerializeField] float maxBullets;
-    [SerializeField] float reloadTime;
+   
+    
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] AudioClip shotSound;
     [SerializeField] AudioClip reloadSound;
@@ -23,9 +23,6 @@ public class WeaponData : ScriptableObject
     public GameObject GetBulletPrefab => bulletPrefab;
     public float GetRoundsBullets => roundsBullets;
     public float GetCadency => cadency;
-
-    public float GetReloadTime => reloadTime;
-    public float GetMaxBullet => maxBullets;
 
     public AudioClip GetShotSound => shotSound;
 

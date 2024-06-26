@@ -18,6 +18,6 @@ MonoBehaviour:
   bulletsPerShoot: 1
   spreadAngle: 0
   bulletPrefab: {fileID: 3469022813990914431, guid: e34478b9c18b39645a6f5492dd70fc52, type: 3}
-  shotSound: {fileID: 8300000, guid: f55e70e600af6864ba98661cf5d8b1e2, type: 3}
-  reloadSound: {fileID: 8300000, guid: c9acc1e90e8f7bd4fb760f2df1ff97e6, type: 3}
+  shotSound: {fileID: 8300000, guid: b8bedca4e69bf8c4d97aa5b82af61950, type: 3}
+  reloadSound: {fileID: 8300000, guid: 0e6a52852fc357042bbc5f5da83c525e, type: 3}
   weaponSprite: {fileID: 804962595, guid: b262285dc3e0b9d449989849b1f548fe, type: 3}

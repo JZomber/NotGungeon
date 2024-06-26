@@ -1,14 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField] private List<WeaponData> weapons = new List<WeaponData>();
+    
     [SerializeField] private WeaponScript weapon;
+   
     [SerializeField] private float scrollSensitivity = 1f;
     private int currentWeaponIndex = 0;
     private float scrollInput;
+
+    
+
+    private void Start()
+    {
+       
+    }
 
     private void Update()
     {
@@ -54,7 +64,14 @@ public class WeaponManager : MonoBehaviour
     private void EquipWeapon(int index)
     {
         weapon.ChangeWeaponData(weapons[index]);
+       
     }
 
+    
+
+   
+
+
+    
 
 }

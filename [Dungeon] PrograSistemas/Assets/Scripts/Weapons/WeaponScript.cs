@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponScript : MonoBehaviour,IGun
 {
@@ -9,6 +10,8 @@ public class WeaponScript : MonoBehaviour,IGun
     AudioSource myAudio;
     List<GameObject> bullets = new List<GameObject>();
     int poolSize = 3;
+
+    public UnityEvent OnShoot = new UnityEvent();
 
     private bool isShooting = false; // Bandera para controlar el estado de disparo
 
@@ -58,7 +61,8 @@ public class WeaponScript : MonoBehaviour,IGun
                     bullet.SetActive(true);
                 }
 
-                PutShootSound();
+                OnShoot.Invoke();
+                 PutShootSound();
             }
         }
     }
@@ -92,6 +96,7 @@ public class WeaponScript : MonoBehaviour,IGun
 
         PutShootSound();
 
+        OnShoot.Invoke();
         yield return new WaitForSeconds(weaponData.GetCadency); // Espera para la cadencia de disparo
 
         isShooting = false; // Restablecer la bandera a false para indicar que ha terminado de disparar
@@ -128,9 +133,10 @@ public class WeaponScript : MonoBehaviour,IGun
 
             PutShootSound();
 
+            OnShoot.Invoke();
             yield return new WaitForSeconds(delay);
         }
-
+        
         isShooting = false; // Restablecer la bandera a false para indicar que ha terminado de disparar
     }
 
