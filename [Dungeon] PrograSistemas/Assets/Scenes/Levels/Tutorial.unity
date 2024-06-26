@@ -317,10 +317,6 @@ PrefabInstance:
       propertyPath: isWeaponActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8105829387005961122, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1565893358}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
 --- !u!4 &210646138 stripped
@@ -1953,10 +1949,6 @@ PrefabInstance:
       propertyPath: isWeaponActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8105829387005961122, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1565893358}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
 --- !u!4 &591513182 stripped
@@ -2977,7 +2969,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_LocalPosition.x
@@ -11445,7 +11437,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1308656915
 Transform:
   m_ObjectHideFlags: 0
@@ -11478,25 +11470,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 1308656918}
-    m_ColliderPaths:
-    - - X: -290000000
-        Y: 563124992
-      - X: -330000000
-        Y: 563124992
-      - X: -330000000
-        Y: 535624992
-      - X: -290000000
-        Y: 535624992
-    - - X: -290000000
-        Y: 323124992
-      - X: -330000000
-        Y: 323124992
-      - X: -330000000
-        Y: 295624992
-      - X: -290000000
-        Y: 295624992
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: -29.000029, y: 53.5625}
@@ -12342,7 +12316,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4612643403787525561, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
       propertyPath: m_LocalPosition.x
