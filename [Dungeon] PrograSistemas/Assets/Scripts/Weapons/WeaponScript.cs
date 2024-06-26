@@ -30,6 +30,7 @@ public class WeaponScript : MonoBehaviour,IGun
         if (myAudio == null) return;
 
         ChangeWeaponSprite();
+
     }
 
     public void Shoot(Transform orig)
@@ -57,10 +58,7 @@ public class WeaponScript : MonoBehaviour,IGun
                     bullet.SetActive(true);
                 }
 
-                if (myAudio != null)
-                {
-                    myAudio.PlayOneShot(weaponData.GetShotSound);
-                }
+                PutShootSound();
             }
         }
     }
@@ -91,10 +89,9 @@ public class WeaponScript : MonoBehaviour,IGun
             }
             angle += angleStep;
         }
-        if (myAudio != null)
-        {
-            myAudio.PlayOneShot(weaponData.GetShotSound);
-        }
+
+        PutShootSound();
+
         yield return new WaitForSeconds(weaponData.GetCadency); // Espera para la cadencia de disparo
 
         isShooting = false; // Restablecer la bandera a false para indicar que ha terminado de disparar
@@ -128,10 +125,9 @@ public class WeaponScript : MonoBehaviour,IGun
                 bullet.transform.rotation = orig.rotation * Quaternion.Euler(0, 0, -90);
                 bullet.SetActive(true);
             }
-            if (myAudio != null) 
-            {
-                myAudio.PlayOneShot(weaponData.GetShotSound);
-            }
+
+            PutShootSound();
+
             yield return new WaitForSeconds(delay);
         }
 
@@ -145,6 +141,31 @@ public class WeaponScript : MonoBehaviour,IGun
         {
             spriteRenderer.sprite = weaponData.GetWeaponSprite;
         }
+        PutReload();
+    }
 
+    public void PutReload() 
+    {
+        if (weaponData.GetReloadSound != null && myAudio != null) 
+        { 
+            myAudio.PlayOneShot(weaponData.GetReloadSound); 
+        }   
+
+    }
+
+    public void PutShootSound() 
+    {
+        if (weaponData.GetShotSound != null && myAudio != null)
+        {
+            myAudio.PlayOneShot(weaponData.GetShotSound);
+        }
+
+    }
+
+    public void ChangeWeaponData(WeaponData weaponData) 
+    {
+        this.weaponData = weaponData;
+        ChangeWeaponSprite();
+        
     }
 }
