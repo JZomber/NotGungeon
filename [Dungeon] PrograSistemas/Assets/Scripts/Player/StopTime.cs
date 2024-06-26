@@ -5,89 +5,51 @@ using UnityEngine;
 
 public class StopTime : MonoBehaviour
 {
-    public KeyCode timeControlKey = KeyCode.Q; // Tecla para pausar y reanudar el tiempo
-    public float maxUses = 3; // Máximo número de usos antes de esperar para incrementar nuevamente
-    public float cooldownTime = 5f; // Tiempo de espera antes de incrementar el contador nuevamente
-    private float currentUses; // Número actual de usos disponibles
+    public KeyCode timeControlKey = KeyCode.Q; // Tecla para activar el poder
+    public float slowMotionDuration = 2f; // Duración del efecto de ralentización
+    public float cooldownTime = 5f; // Tiempo de espera antes de poder usar el poder nuevamente
+    public float slowMotionScale = 0.5f; // Escala de tiempo para el efecto de ralentización
 
-    private bool isCooldown = false; // Bandera para verificar si está en espera de incremento
-
-    private bool PowerActive = false;
-    public bool GetPowerActive => PowerActive;
+    private bool isCooldown = false; // Bandera para verificar si está en cooldown
+    private bool isSlowMotionActive = false; // Bandera para verificar si el efecto está activo
 
     public GameObject powerIndicator; // Referencia al objeto de la UI que indica la disponibilidad del poder
 
-    void Start()
-    {
-        currentUses = maxUses; // Inicializar el número de usos
-        UpdatePowerIndicator(); // Actualizar el indicador UI al inicio
-    }
-
     void Update()
     {
-        // Detectar si la tecla está presionada para pausar y reanudar el tiempo
-        if (Input.GetKeyDown(timeControlKey))
+        if (Input.GetKeyDown(timeControlKey) && !isCooldown && !isSlowMotionActive)
         {
-            if (currentUses > 0)
-            {
-                StopTimeAction();
-            }
-        }
-        else if (Input.GetKeyUp(timeControlKey))
-        {
-            ResumeTime();
+            StartCoroutine(SlowMotionCoroutine());
         }
     }
 
-    void StopTimeAction()
+    IEnumerator SlowMotionCoroutine()
     {
-        PowerActive = true;
-        Time.timeScale = 0; // Detener el tiempo
-        currentUses--; // Reducir la cantidad de usos
-        UpdatePowerIndicator(); // Actualizar el indicador UI
-        Debug.Log("Usos restantes: " + currentUses);
+        isSlowMotionActive = true;
+        Time.timeScale = slowMotionScale; // Activar el efecto de ralentización
+        UpdatePowerIndicator(false); // Actualizar el indicador UI
 
-        // Verificar si se necesita iniciar el cooldown para incrementar los usos nuevamente
-        if (currentUses <= 0 && !isCooldown)
-        {
-            StartCoroutine(CooldownCoroutine());
-        }
-    }
+        yield return new WaitForSecondsRealtime(slowMotionDuration); // Esperar la duración del efecto en tiempo real
 
-    void ResumeTime()
-    {
-        Time.timeScale = 1; // Reanudar el tiempo
-        PowerActive = false;
+        Time.timeScale = 1f; // Reanudar el tiempo normal
+        isSlowMotionActive = false;
+
+        StartCoroutine(CooldownCoroutine()); // Iniciar el cooldown
     }
 
     IEnumerator CooldownCoroutine()
     {
         isCooldown = true; // Establecer la bandera de cooldown
-
         yield return new WaitForSeconds(cooldownTime); // Esperar el tiempo de cooldown
-
-        currentUses++; // Incrementar los usos
-        UpdatePowerIndicator(); // Actualizar el indicador UI
-        Debug.Log("Usos aumentados a: " + currentUses);
-
-        // Reiniciar la bandera de cooldown
-        isCooldown = false;
+        isCooldown = false; // Reiniciar la bandera de cooldown
+        UpdatePowerIndicator(true); // Actualizar el indicador UI
     }
 
-    void UpdatePowerIndicator()
+    void UpdatePowerIndicator(bool isActive)
     {
         if (powerIndicator != null)
         {
-            if (currentUses > 0)
-            {
-                powerIndicator.SetActive(true); // Activar el indicador
-            }
-            else
-            {
-                powerIndicator.SetActive(false); // Desactivar el indicador
-            }
+            powerIndicator.SetActive(isActive); // Activar o desactivar el indicador UI dependiendo de si hay usos disponibles
         }
-        // Activar o desactivar el indicador UI dependiendo de si hay usos disponibles
-       
     }
 }

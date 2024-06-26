@@ -15,4 +15,8 @@ MonoBehaviour:
   damage: 0
   cadency: 0.2
   roundsBullets: 3
+  bulletsPerShoot: 0
+  spreadAngle: 0
   bulletPrefab: {fileID: 3469022813990914431, guid: 11083193d708d3f4b97955819a8177c3, type: 3}
+  shotSound: {fileID: 8300000, guid: 25df380368c3d644b87790cae99be885, type: 3}
+  weaponSprite: {fileID: -209475755, guid: b262285dc3e0b9d449989849b1f548fe, type: 3}

@@ -45,23 +45,19 @@ public class PlayerShoot : MonoBehaviour
                 timePowerUp = 6f;
                 //Debug.LogError("Power Shoot desactivado");
             }
-        }
-
-        if (stopTime != null)
-        {
-            if (!stopTime.GetPowerActive)
+        } 
+            
+        if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
             {
-                if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
-                {
-                    if (weaponScript != null)
-                    {
-                        weaponScript.Shoot(shootingOrig);
-                    }
-                    //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
-                }
+            if (weaponScript != null)
+            {
+            weaponScript.Shoot(shootingOrig);
             }
-
+            //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
         }
+            
+
+        
         else 
         {
             if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
