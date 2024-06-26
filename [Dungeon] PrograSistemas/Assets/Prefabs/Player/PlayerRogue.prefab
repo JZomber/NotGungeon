@@ -226,8 +226,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeControlKey: 113
-  maxUses: 1
+  slowMotionDuration: 2
   cooldownTime: 3
+  slowMotionScale: 0.5
   powerIndicator: {fileID: 0}
 --- !u!1 &4919538022471709382
 GameObject:
@@ -239,6 +240,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1187452480917706967}
   - component: {fileID: 1820554443855235954}
+  - component: {fileID: 1099544301}
   m_Layer: 0
   m_Name: GunCenter
   m_TagString: Untagged
@@ -275,6 +277,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 2705700512366788034}
+--- !u!114 &1099544301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919538022471709382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c59f7e2b1d35ac479f5d3c92402924f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 11400000, guid: 37b6bb05498f6b3459784c9a30e0238a, type: 2}
+  - {fileID: 11400000, guid: 93f364733ba427641be82144d5c9df61, type: 2}
+  - {fileID: 11400000, guid: 7e0ec456ae49c47498b8424c0d399868, type: 2}
+  weapon: {fileID: 8351198990036626136}
+  scrollSensitivity: 1
 --- !u!1001 &6272519498498296004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -355,7 +375,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4397660984528788353, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
       propertyPath: m_Name
-      value: BasicPistol
+      value: Gun
+      objectReference: {fileID: 0}
+    - target: {fileID: 4514721332716920815, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+      propertyPath: m_Volume
+      value: 0.445
       objectReference: {fileID: 0}
     - target: {fileID: 6844201568584190483, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -414,3 +438,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4397660984528788353, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
   m_PrefabInstance: {fileID: 7851415520263445760}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8351198990036626136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2238500039648442328, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+  m_PrefabInstance: {fileID: 7851415520263445760}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5904911308614289025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92f6435d221d5e34db86d19ef98205b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
