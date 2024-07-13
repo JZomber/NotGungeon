@@ -5,13 +5,8 @@ namespace PowerUps
 { 
     public class ShieldPowerUp : MonoBehaviour
     {
-        [SerializeField] private int damageResist = 5;
+        [SerializeField] private int damageResist;
         private int currentResistance;
-
-        private void Start()
-        {
-            currentResistance = damageResist;
-        }
 
         public void TakeDamage(int dmg)
         {
@@ -30,6 +25,11 @@ namespace PowerUps
                 currentResistance = 0;
                 gameObject.SetActive(false);
             }
+        }
+
+        private void OnEnable()
+        {
+            currentResistance = damageResist;
         }
     }
 }

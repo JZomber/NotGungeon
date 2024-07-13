@@ -12,7 +12,7 @@ public class PlayerPowerUps : MonoBehaviour
     private ShieldPowerUp shieldPowerUp; //Script del powerUp de escudo
     public bool isShieldActive; //Bool si est� activo el escudo
     
-    private TDA_Queue tdaQueue; //Script de la lista de power ups
+    private PowerUpsStack tdaStack; //Script de la lista de power ups
     private GameObject powerUp; //Objeto de la lista de power ups
 
     private LifeSystem lifeSystem; //Script del sistema de vidas
@@ -26,7 +26,7 @@ public class PlayerPowerUps : MonoBehaviour
     {
         shieldPowerUp = shieldPrefab.GetComponent<ShieldPowerUp>(); //Script del escudo (powerUp)
         playerCollider = this.GameObject().GetComponent<CapsuleCollider2D>(); //Collider del player
-        tdaQueue = FindObjectOfType<TDA_Queue>(); // Busca el script TDA Queue
+        tdaStack = FindObjectOfType<PowerUpsStack>(); // Busca el script TDA Queue
         lifeSystem = FindObjectOfType<LifeSystem>(); // Busca el script del TDA Pila
         playerShoot = FindObjectOfType<PlayerShoot>(); // Busca el script que le permite al player disparar
     }
@@ -35,9 +35,9 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) //Input - SPACE
         {
-            powerUp = tdaQueue.currentPowerUp; //Referencio al primer objeto de la TDA Cola
+            powerUp = tdaStack.CheckCurrentPowerUp(); //Referencio al primer objeto de la TDA Cola
 
-            if (powerUp != null) 
+            if (powerUp) 
             {
                 if (powerUp.name == "Shield") // Si el objeto es el escudo
                 {
@@ -55,10 +55,8 @@ public class PlayerPowerUps : MonoBehaviour
                 {
                     playerShoot.isPowerActive = true;
                 }
+                tdaStack.RemovePowerUp(); //Quito el objeto del TDA Cola
             }
-            
-            
-            tdaQueue.RemovePowerUp(); //Quito el objeto del TDA Cola
         }
 
         if (!shieldPrefab.activeInHierarchy) //Si la resistencia del escudo termina
@@ -72,7 +70,7 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (other.CompareTag("PowerUp"))
         {
-            tdaQueue.AddPowerUp(other.GameObject());
+            tdaStack.AddPowerUp(other.GameObject());
         }
     }
 }

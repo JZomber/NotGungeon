@@ -76,7 +76,6 @@ public class ModularRooms : MonoBehaviour
     {
         unlocked = true;
         UpdateExits();
-        roomTrigger.enabled = !unlocked;
         //OnRoomUnlocked?.Invoke(this); //Si tiene que pasar algo cuando se desbloquea una sala.
     }
 
@@ -183,10 +182,11 @@ public class ModularRooms : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !unlocked)
+        if (other.CompareTag("Player") || other.CompareTag("Shield") && !unlocked)
         {
             OnPlayerEnteredRoom?.Invoke(this);
             PlayerEnteredNewRoom();
+            roomTrigger.enabled = false;
         }
     }
     

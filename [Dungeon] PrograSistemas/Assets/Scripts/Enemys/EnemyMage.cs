@@ -18,7 +18,7 @@ public class EnemyMage : MonoBehaviour
     private Vector2 spawnPoint;
     private GameObject currentTarget;
     private bool isReviving;
-    private List<GameObject> nextTarget;
+    private List<GameObject> nextTarget = new List<GameObject>();
 
     public event Action<GameObject> OnMageKilled;
 
@@ -30,7 +30,7 @@ public class EnemyMage : MonoBehaviour
 
     private void EnemySetup()
     {
-        nextTarget = new List<GameObject>();
+        currentTarget = null;
         
         isAlive = true;
         currentHealth = health;
@@ -42,7 +42,7 @@ public class EnemyMage : MonoBehaviour
         if (enemyManager != null)
         {
             enemyManager.OnMageCalled += HandlerGetNewTarget;
-            Debug.Log($"{gameObject.name} SE HA SUBSCRITO AL EVENTO OnMageCalled");
+            //Debug.Log($"{gameObject.name} SE HA SUBSCRITO AL EVENTO OnMageCalled");
         }
 
         if (capsuleCollider2D == null)
@@ -166,5 +166,6 @@ public class EnemyMage : MonoBehaviour
     private void OnDisable()
     {
         enemyManager.OnMageCalled -= HandlerGetNewTarget;
+        nextTarget.Clear();
     }
 }

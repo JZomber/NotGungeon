@@ -7,7 +7,13 @@ using UnityEngine;
 public class TeleportTrigger : MonoBehaviour
 {
     private Transform teleportPosition;
-    
+    private GameObject player;
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player");
+    }
+
     public void Initialize(Transform position)
     {
         teleportPosition = position;
@@ -15,9 +21,9 @@ public class TeleportTrigger : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") || other.CompareTag("Shield"))
         {
-            other.transform.position = teleportPosition.position;
+            player.transform.position = teleportPosition.position;
         }
     }
 }
