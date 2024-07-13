@@ -14,36 +14,27 @@ using UnityEditor;
 public class ModularRooms : MonoBehaviour
 {
     [SerializeField] private Exit[] exits = new Exit[4];
-
     [SerializeField] private Enemy[] enemies = new Enemy[4];
-
     [SerializeField] private List<GameObject> doorsList;
-    
     [SerializeField] private List<Transform> enemySpawnsList;
-
     private int maxEnemiesAmount;
     
     public static event Action<ModularRooms> OnPlayerEnteredRoom;
-    
     //public static event Action<ModularRooms> OnRoomUnlocked; //Si tiene que pasar algo cuando se desbloquea una sala.
-    
     public event Action<List<GameObject>, List<Transform>> OnSpawnEnemiesRequest;
-
-    [SerializeField] private RoomConfig roomConfig;
     
+    [SerializeField] private RoomConfig roomConfig;
     [SerializeField] private Collider2D roomTrigger;
-
     [SerializeField] private GameObject easyRoomDesign;
     [SerializeField] private GameObject hardRoomDesign;
-    
     [SerializeField] private bool unlocked;
     [SerializeField] private bool playerSpawn;
     
     private enum Difficulty { Easy, Hard }
     private Difficulty selectedDifficulty;
-    
     private int maxDifficultyPoints;
 
+    private Dictionary<Enemy, int> enemyInstanceCounts;
     private List<GameObject> enemiesSelected;
     private List<Transform> enemiesSelectedSpawns;
 
@@ -51,6 +42,12 @@ public class ModularRooms : MonoBehaviour
     {
         enemiesSelected = new List<GameObject>();
         enemiesSelectedSpawns = new List<Transform>();
+        enemyInstanceCounts = new Dictionary<Enemy, int>();
+        
+        foreach (var enemy in enemies)
+        {
+            enemyInstanceCounts[enemy] = 0;
+        }
         
         if (Application.isPlaying)
         {
@@ -128,8 +125,12 @@ public class ModularRooms : MonoBehaviour
             {
                 if (enemiesSelected.Count < maxEnemiesAmount && totalDiffPoints + enemy.diffPoints <= maxDifficultyPoints)
                 {
-                    enemiesSelected.Add(enemy.enemyPrefab);
-                    totalDiffPoints += enemy.diffPoints;
+                    if (enemyInstanceCounts[enemy] < enemy.maxInstances)
+                    {
+                        enemiesSelected.Add(enemy.enemyPrefab);
+                        totalDiffPoints += enemy.diffPoints;
+                        enemyInstanceCounts[enemy]++;
+                    }
                 }
                 else if (totalDiffPoints + enemy.diffPoints > maxDifficultyPoints)
                 {
@@ -223,6 +224,7 @@ public class ModularRooms : MonoBehaviour
     {
         public GameObject enemyPrefab;
         public int diffPoints;
+        public int maxInstances = 1; // 1 Default
         //public bool isHardOnly;
     }
     

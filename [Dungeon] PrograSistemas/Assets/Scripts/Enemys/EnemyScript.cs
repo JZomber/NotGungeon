@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -125,7 +126,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    public IEnumerator EnemyRevive(float delay)
+    public void EnemyRevive()
     {
         if (!isAlive)
         {
@@ -137,15 +138,19 @@ public class EnemyScript : MonoBehaviour
             {
                 rangedEnemy.isWeaponActive = true;
                 StartCoroutine(rangedEnemy.UpdateWeaponStatus(1f));
+                StartCoroutine(RangedReset(1.5f));
             }
-
-            OnEnemyRevived?.Invoke();
             
-            yield return new WaitForSeconds(delay); //Delay antes de que se pueda volver a atacar
-
-            capsuleCollider2D.enabled = true;
-            rangedEnemy.canShoot = true;
+            OnEnemyRevived?.Invoke();
         }
+    }
+
+    private IEnumerator RangedReset(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        
+        capsuleCollider2D.enabled = true;
+        rangedEnemy.canShoot = true;
     }
 
     private void OnEnable()

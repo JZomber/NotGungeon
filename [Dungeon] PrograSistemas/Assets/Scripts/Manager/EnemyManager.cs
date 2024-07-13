@@ -41,12 +41,12 @@ public class EnemyManager : MonoBehaviour
                 {
                     enemyScript.OnEnemyKilled += HandlerEnemyKilled;
                     enemyScript.OnEnemyRevived += HandlerEnemyRevived;
-                    Debug.Log($"Subscripto al enemigo {enemyScript.GameObject()}");
+                    //Debug.Log($"Subscripto al enemigo {enemyScript.GameObject()}");
                 }
                 else if (enemyMage != null)
                 {
                     enemyMage.OnMageKilled += HandlerEnemyKilled;
-                    Debug.Log("Subscripto al mago");
+                    //Debug.Log("Subscripto al mago");
                 }
             }
         }
@@ -66,6 +66,13 @@ public class EnemyManager : MonoBehaviour
 
     private void HandleSpawnEnemies(List<GameObject> enemies, List<Transform> spawns)
     {
+        StartCoroutine(EnemySpawner(enemies, spawns, 1f));
+    }
+
+    private IEnumerator EnemySpawner(List<GameObject> enemies, List<Transform> spawns, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        
         for (int i = 0; i < enemies.Count; i++)
         {
             GameObject enemy = GetEnemyFromPool(enemies[i]);
@@ -75,7 +82,7 @@ public class EnemyManager : MonoBehaviour
         }
 
         activeEnemyAmount = enemies.Count;
-        Debug.Log($"Objetivo de enemigos {activeEnemyAmount}");
+        //Debug.Log($"Objetivo de enemigos {activeEnemyAmount}");
     }
 
     private GameObject GetEnemyFromPool(GameObject prefab)
@@ -108,7 +115,7 @@ public class EnemyManager : MonoBehaviour
     
     private void HandlerEnemyKilled(GameObject obj)
     {
-        Debug.Log($"ENEMIGO {obj} ELIMINADO");
+        //Debug.Log($"ENEMIGO {obj} ELIMINADO");
 
         OnMageCalled?.Invoke(obj);
 
@@ -150,12 +157,12 @@ public class EnemyManager : MonoBehaviour
                     {
                         enemyScript.OnEnemyKilled -= HandlerEnemyKilled;
                         enemyScript.OnEnemyRevived -= HandlerEnemyRevived;
-                        Debug.Log($"Desubscripto al enemigo {enemyScript.GameObject()}");
+                        //Debug.Log($"Desubscripto al enemigo {enemyScript.GameObject()}");
                     }
                     else if (enemyMage != null)
                     {
                         enemyMage.OnMageKilled -= HandlerEnemyKilled;
-                        Debug.Log("Desubscripto al mago");
+                        //Debug.Log("Desubscripto al mago");
                     }
                     
                 }

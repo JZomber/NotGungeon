@@ -9,18 +9,15 @@
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Rooms/BigRoom.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Rooms/BigRoom.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Rooms/SmallRoom.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Rooms/SmallRoom.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level_1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Level_1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level_2.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Level_2.unity.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Levels/Tutorial.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Menu/Menu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Menu/Menu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test/Rooms.unity" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Test/Rooms.unity.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemys/EnemyMage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemys/EnemyMage.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Enemys/EnemyScript.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Enemys/EnemyScript.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Manager/EnemyManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Manager/EnemyManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Rooms/ModularRooms.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Rooms/ModularRooms.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0-prev.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/AssetImportWorker0.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" beforeDir="false" afterPath="$PROJECT_DIR$/Logs/shadercompiler-UnityShaderCompiler.exe0.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/Assembly-CSharp.csproj.AssemblyReference.cache" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +38,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Agus.push3",
+    "git-widget-placeholder": "Rooms",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -112,6 +109,7 @@
       <workItem from="1718658587329" duration="2377000" />
       <workItem from="1718731733280" duration="20115000" />
       <workItem from="1718767937950" duration="427000" />
+      <workItem from="1720830776528" duration="2821000" />
     </task>
     <servers />
   </component>

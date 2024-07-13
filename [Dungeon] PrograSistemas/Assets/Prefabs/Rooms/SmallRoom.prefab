@@ -4562,12 +4562,16 @@ MonoBehaviour:
   enemies:
   - enemyPrefab: {fileID: 706128051973422528, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
     diffPoints: 10
+    maxInstances: 4
   - enemyPrefab: {fileID: 706128051973422528, guid: 4ff469b069396b94998bf64a37693ad4, type: 3}
     diffPoints: 20
+    maxInstances: 2
   - enemyPrefab: {fileID: 706128051973422528, guid: 6ab7866377430484180dbded88e04869, type: 3}
     diffPoints: 30
+    maxInstances: 2
   - enemyPrefab: {fileID: 706128051973422528, guid: d956cc8ad641043408ea6f4637ac78cf, type: 3}
     diffPoints: 40
+    maxInstances: 1
   doorsList:
   - {fileID: 5356140498196979669}
   - {fileID: 5356140498072802749}
