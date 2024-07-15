@@ -6273,7 +6273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bdc8891e03c27a4384394b5735d7d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 50
+  maxLife: 5
   heartPrefab: {fileID: 6331390066630487331, guid: f98724ad0c748c24c85e6bf409b659b1, type: 3}
   heartParent: {fileID: 1359032307}
   player: {fileID: 1565893358}
