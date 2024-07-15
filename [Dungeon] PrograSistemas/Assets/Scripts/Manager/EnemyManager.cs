@@ -8,23 +8,24 @@ using UnityEngine.Serialization;
 public class EnemyManager : MonoBehaviour
 {
     private EnemyScript[] enemyScripts;
-
     private ModularRooms[] modularRooms;
-
     private EnemyMage[] enemyMages;
-
+    [SerializeField] private GameObject enemySpawner;
+    [SerializeField] private int maxSpawnersAmount;
+    
     [SerializeField] private List<EnemyPoolClass> enemyClass;
     private List<GameObject> enemyPool;
-
+    private List<GameObject> spawnerPool;
     private int activeEnemyAmount;
 
     public event Action<GameObject> OnMageCalled;
-
     public static event Action OnRoomCompleted;
+    public event Action OnEnemyDespawn;
     
     private void Awake()
     {
         enemyPool = new List<GameObject>();
+        spawnerPool = new List<GameObject>();
         
         foreach (var poolItem in enemyClass)
         {
@@ -50,6 +51,13 @@ public class EnemyManager : MonoBehaviour
                 }
             }
         }
+
+        for (int i = 0; i < maxSpawnersAmount; i++)
+        {
+            GameObject newSpawner = Instantiate(enemySpawner);
+            newSpawner.SetActive(false);
+            spawnerPool.Add(newSpawner);
+        }
     }
     
     // Start is called before the first frame update
@@ -66,7 +74,18 @@ public class EnemyManager : MonoBehaviour
 
     private void HandleSpawnEnemies(List<GameObject> enemies, List<Transform> spawns)
     {
-        StartCoroutine(EnemySpawner(enemies, spawns, 1f));
+        SpawnersInitialize(spawns);
+        StartCoroutine(EnemySpawner(enemies, spawns, 1.25f));
+    }
+
+    private void SpawnersInitialize(List<Transform> spawns)
+    {
+        for (int i = 0; i < spawns.Count; i++)
+        {
+            GameObject spawner = GetSpawnerFromPool();
+            spawner.transform.position = new Vector3(spawns[i].position.x, spawns[i].position.y + 0.5f);
+            spawner.SetActive(true);
+        }
     }
 
     private IEnumerator EnemySpawner(List<GameObject> enemies, List<Transform> spawns, float delay)
@@ -85,6 +104,21 @@ public class EnemyManager : MonoBehaviour
         //Debug.Log($"Objetivo de enemigos {activeEnemyAmount}");
     }
 
+    private GameObject GetSpawnerFromPool()
+    {
+        for (int i = 0; i < spawnerPool.Count; i++)
+        {
+            if (!spawnerPool[i].activeInHierarchy)
+            {
+                return spawnerPool[i];
+            }
+        }
+
+        GameObject newSpawner = Instantiate(enemySpawner);
+        spawnerPool.Add(newSpawner);
+        return newSpawner;
+    }
+
     private GameObject GetEnemyFromPool(GameObject prefab)
     {
         for (int i = 0; i < enemyPool.Count; i++)
@@ -100,8 +134,10 @@ public class EnemyManager : MonoBehaviour
         return newEnemy;
     }
 
-    private void DeactivateEnemies()
+    private IEnumerator DeactivateEnemies(float delay)
     {
+        yield return new WaitForSeconds(delay);
+        
         for (int i = 0; i < enemyPool.Count; i++)
         {
             GameObject enemy = enemyPool[i].GameObject();
@@ -112,19 +148,25 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator DespawnEnemies(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        OnEnemyDespawn?.Invoke();
+    }
     
     private void HandlerEnemyKilled(GameObject obj)
     {
         //Debug.Log($"ENEMIGO {obj} ELIMINADO");
 
         OnMageCalled?.Invoke(obj);
-
         activeEnemyAmount--;
 
         if (activeEnemyAmount == 0)
         {
             OnRoomCompleted?.Invoke();
-            DeactivateEnemies();
+            StartCoroutine(DespawnEnemies(1f));
+            StartCoroutine(DeactivateEnemies(2f));
         }
     }
 

@@ -1,34 +1,34 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
-    
-    [Header("Enemy Attributes")] 
+    [Header("Enemy Attributes")]
     public float health;
-    private float currentHealth; 
+    private float currentHealth;
     public float speed;
     public bool isAlive = true;
     public bool isRangedEnemy;
     private Animator animator;
-
     private CapsuleCollider2D capsuleCollider2D;
-    
-    [Header("Player")] public GameObject player;
+
+    [Header("Player")]
+    public GameObject player;
     private float distance;
 
-    private EnemyMage enemyMage;
     private RangedEnemy rangedEnemy;
+    //private SoundManager soundManager; // Referencia al SoundManager
+    private EnemyManager enemyManager;
 
     public event Action<GameObject> OnEnemyKilled;
     public event Action OnEnemyRevived;
-    
+
     private void Start()
     {
         EnemySetup();
+
+        //soundManager = SoundManager.Instance; // Obtener instancia del SoundManager
     }
 
     void Update()
@@ -37,7 +37,7 @@ public class EnemyScript : MonoBehaviour
         {
             // Perseguir al Jugador
             distance = Vector2.Distance(transform.position, player.transform.position);
-        
+
             if (distance < 20)
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
@@ -50,29 +50,39 @@ public class EnemyScript : MonoBehaviour
         isAlive = true;
         currentHealth = health;
         
+        if (enemyManager == null)
+        {
+            enemyManager = FindObjectOfType<EnemyManager>();
+            enemyManager.OnEnemyDespawn += HandlerEnemyDespawn;
+        }
+        else
+        {
+            enemyManager.OnEnemyDespawn += HandlerEnemyDespawn;
+        }
+        
+
         if (capsuleCollider2D == null)
         {
             capsuleCollider2D = gameObject.GetComponent<CapsuleCollider2D>();
         }
-        
-        capsuleCollider2D.enabled = true;
+        capsuleCollider2D.enabled = false;
         capsuleCollider2D.isTrigger = false;
 
         if (animator == null)
         {
             animator = gameObject.GetComponent<Animator>();
         }
-        
+
         if (isRangedEnemy)
         {
             if (rangedEnemy == null)
             {
                 rangedEnemy = gameObject.GetComponent<RangedEnemy>();
             }
-            
+
             rangedEnemy.isWeaponActive = true;
-            rangedEnemy.canShoot = true;
             StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
+            StartCoroutine(RangedReset(1f));
         }
     }
 
@@ -82,18 +92,21 @@ public class EnemyScript : MonoBehaviour
         if (isAlive)
         {
             currentHealth -= damage;
-            
+
             if (currentHealth <= 0)
             {
                 isAlive = false;
                 capsuleCollider2D.enabled = false;
                 animator.SetTrigger("isDead");
 
-                if (OnEnemyKilled != null)
-                {
-                    OnEnemyKilled(this.GameObject());
-                }
-            
+                OnEnemyKilled?.Invoke(this.gameObject);
+
+                // Reproducir el sonido de muerte del enemigo
+                // if (soundManager != null)
+                // {
+                //     soundManager.PlayEnemySkeletonDeathSound();
+                // }
+
                 if (isRangedEnemy && gameObject.activeInHierarchy)
                 {
                     rangedEnemy.canShoot = false;
@@ -112,10 +125,13 @@ public class EnemyScript : MonoBehaviour
             animator.SetTrigger("isDead");
             isAlive = false;
 
-            if (OnEnemyKilled != null)
-            {
-                OnEnemyKilled(this.GameObject());
-            }
+            OnEnemyKilled?.Invoke(gameObject);
+
+            // Reproducir el sonido de muerte del enemigo
+            // if (soundManager != null)
+            // {
+            //     soundManager.PlayEnemySkeletonDeathSound();
+            // }
 
             if (isRangedEnemy)
             {
@@ -133,22 +149,29 @@ public class EnemyScript : MonoBehaviour
             isAlive = true;
             currentHealth = health;
             animator.SetTrigger("isRevived");
-            
+            //SoundManager.Instance.PlayEnemyReviveSound();
+
             if (isRangedEnemy)
             {
                 rangedEnemy.isWeaponActive = true;
                 StartCoroutine(rangedEnemy.UpdateWeaponStatus(1f));
                 StartCoroutine(RangedReset(1.5f));
             }
-            
+
             OnEnemyRevived?.Invoke();
         }
+    }
+
+    private void HandlerEnemyDespawn()
+    {
+        animator.SetTrigger("despawn");
+        enemyManager.OnEnemyDespawn -= HandlerEnemyDespawn;
     }
 
     private IEnumerator RangedReset(float delay)
     {
         yield return new WaitForSeconds(delay);
-        
+
         capsuleCollider2D.enabled = true;
         rangedEnemy.canShoot = true;
     }

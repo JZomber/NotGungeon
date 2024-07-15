@@ -2976,6 +2976,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbb41c0d0c770f44ac947453f0b4482, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpawner: {fileID: 5224440271227611922, guid: ea77fe75fbf31b241bbc741084dc52f6, type: 3}
+  maxSpawnersAmount: 6
   enemyClass:
   - enemyPrefab: {fileID: 706128051973422528, guid: 814018913da08d24f9e27bbf9dc77316, type: 3}
     initialAmount: 4
@@ -3899,7 +3901,6 @@ MonoBehaviour:
   - {fileID: 5802717611334380631, guid: ee3989676e79a04428125752104b082f, type: 3}
   currentPowerUp: {fileID: 0}
   powerUpsParent: {fileID: 443094164}
-  player: {fileID: 1565893358}
 --- !u!4 &644912890
 Transform:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class PlayerMov : MonoBehaviour
             
             if (inputY > 0 || inputY < 0)
             {
-                animator.SetBool("isRunning", true); // Condición para la transición
+                animator.SetBool("isRunning", true); // Condiciï¿½n para la transiciï¿½n
                 animator.SetFloat("Speed", Mathf.Abs(inputY)); //Independientemente del input, siempre da positivo
             }
             else if (inputX > 0 || inputX < 0)
@@ -57,11 +57,6 @@ public class PlayerMov : MonoBehaviour
         if (other.CompareTag("Victory"))
         {
             StartCoroutine(lvlManager.VictoryScreen(1f));
-        }
-
-        if (other.CompareTag("TpCollider"))
-        {
-            lvlManager.TpWaypoint();
         }
     }
 }
