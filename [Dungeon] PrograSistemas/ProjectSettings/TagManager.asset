@@ -67,11 +67,11 @@ TagManager:
   - name: Doors
     uniqueID: 3004478725
     locked: 0
-  - name: Player
-    uniqueID: 2187828427
-    locked: 0
   - name: Enemy
     uniqueID: 859754343
+    locked: 0
+  - name: Player
+    uniqueID: 2187828427
     locked: 0
   - name: Guns
     uniqueID: 1900797795
