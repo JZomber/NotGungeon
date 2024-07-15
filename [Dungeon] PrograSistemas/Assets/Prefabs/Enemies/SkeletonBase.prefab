@@ -189,6 +189,7 @@ MonoBehaviour:
   speed: 0
   isAlive: 1
   isRangedEnemy: 1
+  enemyTutorial: 0
   player: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
 --- !u!114 &5771353771080875476
 MonoBehaviour:

@@ -27,7 +27,6 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         EnemySetup();
-
         //soundManager = SoundManager.Instance; // Obtener instancia del SoundManager
     }
 
