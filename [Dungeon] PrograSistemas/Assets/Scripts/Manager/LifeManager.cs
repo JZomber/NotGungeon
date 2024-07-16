@@ -7,7 +7,7 @@ public class LifeManager : MonoBehaviour
     public int GetMaxLife => maxLife;
     
     private int currentLife; // Vida actual
-    public GameObject player; // Referencia al jugador
+    [SerializeField] private GameObject player; // Referencia al jugador
 
     public event Action OnHeartLost;
     public event Action OnHeartGained;
