@@ -113,6 +113,10 @@ public class EnemyScript : MonoBehaviour
                     StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
                 }
             }
+            else 
+            {
+                animator.SetTrigger("Damaged");
+            }
         }
     }
 

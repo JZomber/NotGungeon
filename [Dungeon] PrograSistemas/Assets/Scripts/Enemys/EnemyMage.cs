@@ -144,6 +144,7 @@ public class EnemyMage : MonoBehaviour
         if (isAlive)
         {
             currentHealth -= damage;
+            
         }
 
         if (currentHealth <= 0 && isAlive)
@@ -158,6 +159,10 @@ public class EnemyMage : MonoBehaviour
 
             OnMageKilled?.Invoke(gameObject);
             enemyManager.OnMageCalled -= HandlerGetNewTarget;
+        }
+        else 
+        {
+            animator.SetTrigger("Damaged");
         }
     }
     
