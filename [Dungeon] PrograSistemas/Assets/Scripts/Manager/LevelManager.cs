@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour
 {
     public Animator transition;
+    [SerializeField] private LevelData levelData;
     
     public IEnumerator VictoryScreen(float delay) //Pantalla de victoria
     {
@@ -25,7 +26,7 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // Espera medio segundo antes de cargar la escena
 
-        SceneManager.LoadScene("Victory");
+        SceneManager.LoadScene(levelData.VictoryScene);
     }
 
     public IEnumerator DefeatScreen(float delay) //Pantalla de derrota
@@ -46,6 +47,6 @@ public class LevelManager : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // Espera medio segundo antes de cargar la escena
 
-        SceneManager.LoadScene("Defeat");
+        SceneManager.LoadScene(levelData.DefeatScene);
     }
 }

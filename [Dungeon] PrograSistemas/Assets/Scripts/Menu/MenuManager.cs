@@ -1,70 +1,120 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class MenuManager : MonoBehaviour
 {
     public Animator transition;
-    
+    [SerializeField] private LevelData levelData;
+    [SerializeField] private GameObject disableAbleButton;
+    [SerializeField] private GameObject menuButton;
+
+    private void Start()
+    {
+        Scene activeScene = SceneManager.GetActiveScene();
+        if (activeScene.name == levelData.MenuScene)
+        {
+            if (levelData.CurrenLevelIndex > 0)
+            {
+                disableAbleButton.SetActive(true); // Continue button
+            }
+        }
+        
+        // End of the game || From Tutorial to Victory
+        if (activeScene.name == levelData.VictoryScene)
+        {
+            if (levelData.CurrenLevelIndex == 3 || levelData.IsTutorialRun)
+            {
+                disableAbleButton.SetActive(false); // Next button
+                menuButton.SetActive(true); // Menu button
+            }
+        }
+        
+        // From Tutorial to Defeat
+        if (activeScene.name == levelData.DefeatScene)
+        {
+            if (levelData.IsTutorialRun)
+            {
+                disableAbleButton.SetActive(false); // Restart button
+                menuButton.SetActive(true); // Menu button
+            }
+        }
+    }
+
     public void LoadMenu()
     {
-        StartCoroutine(MenuScreen("Menu"));
+        StartCoroutine(MenuScreen());
     }
-    public void LoadNextLevel() //Carga el primer nivel
+
+    public void NewStart()
     {
-        StartCoroutine(LoadLevel(1));
-        
-        //StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+        StartCoroutine(LoadNewStart());
+    }
+
+    public void LoadCurrentLevel()
+    {
+        StartCoroutine(ReplayCurrentLevel());
+    }
+    
+    public void LoadNextLevel()
+    {
+        StartCoroutine(LoadNewLevel());
     }
     
     public void LoadTutorial()
     {
-        StartCoroutine(TutorialLevel("Tutorial"));
+        StartCoroutine(TutorialLevel());
     }
     
-    public void LoadSecretLevel()
-    {
-        StartCoroutine(SecretLevel("Rooms"));
-    }
-    
-    IEnumerator MenuScreen(string str) //Carga la pantalla "Men�"
+    private IEnumerator MenuScreen()
     {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
         
-        SceneManager.LoadScene(str);
+        SceneManager.LoadScene(levelData.MenuScene);
     }
-
-    IEnumerator LoadLevel(int levelIndex)
+    
+    private IEnumerator ReplayCurrentLevel()
     {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
 
-        SceneManager.LoadScene(levelIndex);
+        SceneManager.LoadScene(levelData.LoadCurrentLevel());
     }
 
-    IEnumerator TutorialLevel(string str)
+    private IEnumerator LoadNewLevel()
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene(levelData.LoadNextLevel());
+    }
+    
+    private IEnumerator LoadNewStart()
+    {
+        transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(1f);
+
+        SceneManager.LoadScene(levelData.NewGameplay());
+    }
+
+    private IEnumerator TutorialLevel()
     {
         transition.SetTrigger("Start");
 
         yield return new WaitForSeconds(1f);
         
-        SceneManager.LoadScene(str);
+        SceneManager.LoadScene(levelData.LoadTutorial());
     }
     
-    IEnumerator SecretLevel(string str)
-    {
-        transition.SetTrigger("Start");
-
-        yield return new WaitForSeconds(1f);
-        
-        SceneManager.LoadScene(str);
-    }
-    
-    public void GameQuit() // Quita el juego
+    public void GameQuit()
     {
         Application.Quit();
     }
