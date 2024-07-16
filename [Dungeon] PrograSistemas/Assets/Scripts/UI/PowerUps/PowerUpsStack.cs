@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,31 +8,22 @@ namespace UI.PowerUps
 {
     public class PowerUpsStack : MonoBehaviour
     {
-        public Image[] powerUpsImg; //Array de imagenes
-        private GameObject currentImg; //Imagen actual
-
-        private Stack<GameObject> powerUpsStack = new Stack<GameObject>(); //Cola de powerUps
+        private Stack<PowerUpData> powerUpsStack = new Stack<PowerUpData>(); //Cola de powerUps
         private int maxSize = 3; // Tamaño del array
-        public GameObject currentPowerUp;
+        public PowerUpData currentPowerUp;
+
+        public event Action<Sprite> OnPowerUpChanged;
         
-        public Transform powerUpsParent; //Punto donde aparecen en UI
-        
-        // Start is called before the first frame update
-        void Start()
-        {
-        }
-        
-        public GameObject CheckCurrentPowerUp()
+        public PowerUpData CheckCurrentPowerUp()
         {
             if (powerUpsStack.Count == 0)
             {
                 return null;
             }
-
             return currentPowerUp;
         }
 
-        public void AddPowerUp(GameObject obj)
+        public void AddPowerUp(PowerUpData powerUp)
         {
             if (powerUpsStack.Count >= maxSize)
             {
@@ -39,9 +31,8 @@ namespace UI.PowerUps
                 return;
             }
             
-            powerUpsStack.Push(obj); //Agrego la referencia del objeto a la lista
-            UpdatePowerUpDisplay();
-            obj.SetActive(false);
+            powerUpsStack.Push(powerUp); //Agrego la referencia del objeto a la lista
+            CheckUpdateList();
         }
 
         public void RemovePowerUp() //Quito el primer objeto que entr� a la lista
@@ -50,35 +41,20 @@ namespace UI.PowerUps
             {
                 return;
             }
-            
             powerUpsStack.Pop();
-            Destroy(currentImg);
-            currentPowerUp = null;
-            UpdatePowerUpDisplay();
+            CheckUpdateList();
         }
 
-        private void InstantiatePowerUpUI(GameObject img)
-        {
-            currentImg = Instantiate(img, powerUpsParent); //Instancio la imagen del primer objeto en la lista
-        }
-
-        private void UpdatePowerUpDisplay()
+        private void CheckUpdateList()
         {
             if (powerUpsStack.Count == 0)
             {
                 currentPowerUp = null;
-                return;
             }
-
-            currentPowerUp = powerUpsStack.Peek();
-            for (int i = 0; i < powerUpsImg.Length; i++)
+            else
             {
-                if (currentPowerUp != null && currentPowerUp.name == powerUpsImg[i].name) //Comparo el nombre del objeto con el de las imagenes
-                {
-                    Destroy(currentImg);
-                    InstantiatePowerUpUI(powerUpsImg[i].gameObject); //Muestro la referencia de la imagen
-                    break;
-                }
+                currentPowerUp = powerUpsStack.Peek();
+                OnPowerUpChanged?.Invoke(currentPowerUp.GetPowerUpIcon);
             }
         }
     }

@@ -54,7 +54,7 @@ public class LifeManager : MonoBehaviour
         }
     }
 
-    public void HealPlayer(int healAmount, GameObject obj)
+    public void HealPlayer(int healAmount)
     {
         for (int i = 0; i < healAmount; i++)
         {
@@ -62,7 +62,6 @@ public class LifeManager : MonoBehaviour
             {
                 OnHeartGained?.Invoke();
                 currentLife++;
-                obj.SetActive(false);
             }
         }
     }

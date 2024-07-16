@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UI.PowerUps;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +16,11 @@ public class UserInterfaceManager : MonoBehaviour
     private Stack<Image> heartStack = new Stack<Image>();
     private LifeManager lifeManager;
     private int heartsMaxAmount;
+
+    [Header("PowerUps Ui")] 
+    [SerializeField] private Image powerUpUI;
+    [SerializeField] private Transform powerUpParent;
+    private PowerUpsStack powerUpsStack;
 
     private LevelManager levelManager;
     
@@ -34,6 +40,12 @@ public class UserInterfaceManager : MonoBehaviour
             
             heartsMaxAmount = lifeManager.GetMaxLife;
             InstantiateHearts();
+        }
+
+        powerUpsStack = FindObjectOfType<PowerUpsStack>();
+        if (powerUpsStack != null)
+        {
+            powerUpsStack.OnPowerUpChanged += HandlerUpdatePowerUpUI;
         }
 
         levelManager = FindObjectOfType<LevelManager>();
@@ -83,6 +95,11 @@ public class UserInterfaceManager : MonoBehaviour
         weaponUI.sprite = uiSprite;
     }
 
+    private void HandlerUpdatePowerUpUI(Sprite uiSprite)
+    {
+        powerUpUI.sprite = uiSprite;
+    }
+
     private void HandlerUnsubscribeEvents()
     {
         if (weaponScript != null)
@@ -94,6 +111,12 @@ public class UserInterfaceManager : MonoBehaviour
         {
             lifeManager.OnHeartLost -= HandlerLostHeart;
             lifeManager.OnHeartGained -= HandlerGainedHeart;
+        }
+        
+        powerUpsStack = FindObjectOfType<PowerUpsStack>();
+        if (powerUpsStack != null)
+        {
+            powerUpsStack.OnPowerUpChanged -= HandlerUpdatePowerUpUI;
         }
         
         levelManager = FindObjectOfType<LevelManager>();

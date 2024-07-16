@@ -12,7 +12,7 @@ public class PlayerPowerUps : MonoBehaviour
     private ShieldPowerUp shieldPowerUp; //Script del powerUp de escudo
     public bool isShieldActive; //Bool si est� activo el escudo
     
-    private PowerUpsStack tdaStack; //Script de la lista de power ups
+    private PowerUpsStack powerUpsStack; //Script de la lista de power ups
     private GameObject powerUp; //Objeto de la lista de power ups
 
     private LifeManager lifeManager; //Script del sistema de vidas
@@ -26,7 +26,7 @@ public class PlayerPowerUps : MonoBehaviour
     {
         shieldPowerUp = shieldPrefab.GetComponent<ShieldPowerUp>(); //Script del escudo (powerUp)
         playerCollider = this.GameObject().GetComponent<CapsuleCollider2D>(); //Collider del player
-        tdaStack = FindObjectOfType<PowerUpsStack>(); // Busca el script TDA Queue
+        powerUpsStack = FindObjectOfType<PowerUpsStack>(); // Busca el script TDA Queue
         lifeManager = FindObjectOfType<LifeManager>(); // Busca el script del TDA Pila
         playerShoot = FindObjectOfType<PlayerShoot>(); // Busca el script que le permite al player disparar
     }
@@ -35,27 +35,12 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space)) //Input - SPACE
         {
-            powerUp = tdaStack.CheckCurrentPowerUp(); //Referencio al primer objeto de la TDA Cola
+            var powerUp = powerUpsStack.CheckCurrentPowerUp(); //Referencio al primer objeto de la TDA Cola
 
-            if (powerUp) 
+            if (powerUp)
             {
-                if (powerUp.name == "Shield") // Si el objeto es el escudo
-                {
-                    playerCollider.enabled = false;
-                    shieldPrefab.SetActive(true);
-                    isShieldActive = true;
-                }
-
-                if (powerUp.name == "HealthUp") // Si el objeto es para recuperar vida
-                {
-                    lifeManager.HealPlayer(2, powerUp.gameObject);
-                }
-
-                if (powerUp.name == "FastShoot") // Si el objeto es para mayor disparo
-                {
-                    playerShoot.isPowerActive = true;
-                }
-                tdaStack.RemovePowerUp(); //Quito el objeto del TDA Cola
+                powerUp.ApplyEffect(this);
+                powerUpsStack.RemovePowerUp(); //Quito el objeto del TDA Cola
             }
         }
 
@@ -65,12 +50,21 @@ public class PlayerPowerUps : MonoBehaviour
             playerCollider.enabled = true;
         }
     }
+
+    public void Heal(int healAmount)
+    {
+        lifeManager.HealPlayer(healAmount);
+    }
     
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("PowerUp"))
         {
-            tdaStack.AddPowerUp(other.GameObject());
+            var powerUpPickup = other.GetComponent<PowerUpPickup>();
+            if (powerUpPickup != null)
+            {
+                powerUpsStack.AddPowerUp(powerUpPickup.powerUpData);
+            }
         }
     }
 }
