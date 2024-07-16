@@ -7,18 +7,14 @@ using static Cinemachine.AxisState;
 public class PlayerMov : MonoBehaviour
 {
     [SerializeField] private float speedMov;
-    //private Animator animator;
-    [SerializeField] private Animator animator;
-
+    [SerializeField] private Animator animator; //private Animator animator;
     public bool isDead = false;
-    
-    private LevelManager lvlManager;
+
+    public event Action OnPlayerVictory;
     
     // Start is called before the first frame update
     void Start()
     {
-        lvlManager = FindObjectOfType<LevelManager>();
-        
         Time.timeScale = 1;
         // animator = GetComponent<Animator>();
     }
@@ -56,7 +52,7 @@ public class PlayerMov : MonoBehaviour
     {
         if (other.CompareTag("Victory"))
         {
-            StartCoroutine(lvlManager.VictoryScreen(1f));
+            OnPlayerVictory?.Invoke();
         }
     }
 }

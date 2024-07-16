@@ -5,48 +5,100 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public Animator transition;
+    [SerializeField] private Animator transition;
     [SerializeField] private LevelData levelData;
-    
-    public IEnumerator VictoryScreen(float delay) //Pantalla de victoria
+    private LifeManager lifeManager;
+    private PlayerMov playerMov;
+
+    public event Action OnLevelFinished;
+
+    private void Start()
     {
+        lifeManager = FindObjectOfType<LifeManager>();
+        if (lifeManager != null)
+        {
+            lifeManager.OnPlayerDeath += HandlerDefeatScreen;
+        }
+
+        playerMov = FindObjectOfType<PlayerMov>();
+        if (playerMov != null)
+        {
+            playerMov.OnPlayerVictory += HandlerVictoryScreen;
+        }
+    }
+
+    public void HandlerVictoryScreen() //Pantalla de victoria
+    {
+        StartCoroutine(LoadVictoryScreen(1.5f));
+        
+        OnLevelFinished?.Invoke();
+
+        UnsubscribeEvents();
+
         // if (BackgroundMusicManager.Instance != null)
         // {
         //     BackgroundMusicManager.Instance.StopMusic();
         // }
 
-        transition.SetTrigger("Start");
-
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
 
         // if (BackgroundMusicManager.Instance != null)
         // {
         //     BackgroundMusicManager.Instance.PlayVictorySound();
         // }
-
-        yield return new WaitForSeconds(0.5f); // Espera medio segundo antes de cargar la escena
-
-        SceneManager.LoadScene(levelData.VictoryScene);
     }
 
-    public IEnumerator DefeatScreen(float delay) //Pantalla de derrota
+    private void HandlerDefeatScreen() //Pantalla de derrota
     {
+        StartCoroutine(LoadDefeatScreen(1.5f));
+        
+        OnLevelFinished?.Invoke();
+
+        UnsubscribeEvents();
+
         // if (BackgroundMusicManager.Instance != null)
         // {
         //     BackgroundMusicManager.Instance.StopMusic();
         // }
 
-        transition.SetTrigger("Start");
-
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
 
         // if (BackgroundMusicManager.Instance != null)
         // {
         //     BackgroundMusicManager.Instance.PlayDefeatSound();
         // }
+    }
+    
+    private IEnumerator LoadVictoryScreen(float delay)
+    {
+        transition.SetTrigger("Start");
+        
+        yield return new WaitForSeconds(delay); // Espera medio segundo antes de cargar la escena
+        
+        SceneManager.LoadScene(levelData.VictoryScene);
+    }
 
-        yield return new WaitForSeconds(0.5f); // Espera medio segundo antes de cargar la escena
-
+    private IEnumerator LoadDefeatScreen(float delay)
+    {
+        transition.SetTrigger("Start");
+        
+        yield return new WaitForSeconds(delay); // Espera medio segundo antes de cargar la escena
+        
         SceneManager.LoadScene(levelData.DefeatScene);
+    }
+
+    private void UnsubscribeEvents()
+    {
+        lifeManager = FindObjectOfType<LifeManager>();
+        if (lifeManager != null)
+        {
+            lifeManager.OnPlayerDeath -= HandlerDefeatScreen;
+        }
+
+        playerMov = FindObjectOfType<PlayerMov>();
+        if (playerMov != null)
+        {
+            playerMov.OnPlayerVictory -= HandlerVictoryScreen;
+        }
     }
 }

@@ -12,16 +12,16 @@ public class Heal : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("Shield"))
         {
             // Obtener la instancia de LifeSystem
-            LifeSystem lifeSystem = LifeSystem.Instance;
+            LifeManager lifeManager = LifeManager.Instance;
 
-            if (lifeSystem != null)
+            if (lifeManager != null)
             {
                 // Curar al jugador
-                lifeSystem.HealPlayer(healAmount, this.GameObject());
+                lifeManager.HealPlayer(healAmount, this.GameObject());
             }
             else
             {
-                Debug.LogError("No se encontró la instancia de LifeSystem.");
+                Debug.LogError("No se encontrÃ³ la instancia de LifeSystem.");
             }
         }
     }
