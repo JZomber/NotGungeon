@@ -15,7 +15,7 @@ public class PlayerPowerUps : MonoBehaviour
     private PowerUpsStack tdaStack; //Script de la lista de power ups
     private GameObject powerUp; //Objeto de la lista de power ups
 
-    private LifeSystem lifeSystem; //Script del sistema de vidas
+    private LifeManager lifeManager; //Script del sistema de vidas
 
     private PlayerShoot playerShoot; //Script que le permite al player disparar
 
@@ -27,7 +27,7 @@ public class PlayerPowerUps : MonoBehaviour
         shieldPowerUp = shieldPrefab.GetComponent<ShieldPowerUp>(); //Script del escudo (powerUp)
         playerCollider = this.GameObject().GetComponent<CapsuleCollider2D>(); //Collider del player
         tdaStack = FindObjectOfType<PowerUpsStack>(); // Busca el script TDA Queue
-        lifeSystem = FindObjectOfType<LifeSystem>(); // Busca el script del TDA Pila
+        lifeManager = FindObjectOfType<LifeManager>(); // Busca el script del TDA Pila
         playerShoot = FindObjectOfType<PlayerShoot>(); // Busca el script que le permite al player disparar
     }
 
@@ -48,7 +48,7 @@ public class PlayerPowerUps : MonoBehaviour
 
                 if (powerUp.name == "HealthUp") // Si el objeto es para recuperar vida
                 {
-                    lifeSystem.HealPlayer(2, powerUp.gameObject);
+                    lifeManager.HealPlayer(2, powerUp.gameObject);
                 }
 
                 if (powerUp.name == "FastShoot") // Si el objeto es para mayor disparo

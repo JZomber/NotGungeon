@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6844201568584190483}
   - component: {fileID: 156674170354270020}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: BasicSMG
   m_TagString: Untagged
   m_Icon: {fileID: 0}

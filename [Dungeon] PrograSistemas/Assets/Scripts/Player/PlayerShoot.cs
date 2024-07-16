@@ -15,7 +15,7 @@ public class PlayerShoot : MonoBehaviour
     StopTime stopTime;
 
     public bool isPowerActive; //Poder de disparo
-    private float timePowerUp = 6f; //Duración del power up
+    private float timePowerUp = 6f; //Duraciï¿½n del power up
 
     public bool canShoot = true;
     
@@ -34,7 +34,7 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isPowerActive) //Si el poder está activo
+        if (isPowerActive) //Si el poder estï¿½ activo
         {
             var dt = Time.deltaTime;
             timePowerUp -= dt;
@@ -48,16 +48,13 @@ public class PlayerShoot : MonoBehaviour
         } 
             
         if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
-            {
-            if (weaponScript != null)
-            {
-            weaponScript.Shoot(shootingOrig);
-            }
-            //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
+        {
+                if (weaponScript != null)
+                {
+                    weaponScript.Shoot(shootingOrig);
+                }
+                //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
         }
-            
-
-        
         else 
         {
             if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
@@ -69,9 +66,6 @@ public class PlayerShoot : MonoBehaviour
                 //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
             }
         }
-        
-        
-        
         
         if (!canShoot)
         {
@@ -85,7 +79,7 @@ public class PlayerShoot : MonoBehaviour
         rotation *=  Quaternion.Euler(0, 0, -90);
         Instantiate(prefab, orig.position, rotation);
             
-        if (isPowerActive) //Si el poder está activo, instancia otra bala
+        if (isPowerActive) //Si el poder estï¿½ activo, instancia otra bala
         {
             yield return new WaitForSeconds(delay);
             Instantiate(prefab, orig.position, rotation);
