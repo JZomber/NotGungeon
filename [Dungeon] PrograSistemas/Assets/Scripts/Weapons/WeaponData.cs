@@ -6,20 +6,21 @@ using UnityEngine;
 
 public class WeaponData : ScriptableObject
 {
-    [SerializeField] float damage;
-    [SerializeField] float cadency;
-    [SerializeField] float roundsBullets;
-    [SerializeField] float bulletsPerShoot;
-    [SerializeField] float spreadAngle;
+    [SerializeField] private float damage;
+    [SerializeField] private float cadency;
+    [SerializeField] private float roundsBullets;
+    [SerializeField] private float bulletsPerShoot;
+    [SerializeField] private float spreadAngle;
    
     
-    [SerializeField] GameObject bulletPrefab;
-    [SerializeField] AudioClip shotSound;
-    [SerializeField] AudioClip reloadSound;
-    [SerializeField] Sprite weaponSprite;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private AudioClip shotSound;
+    [SerializeField] private AudioClip reloadSound;
+    [SerializeField] private Sprite weaponSprite;
+    [SerializeField] private Sprite weaponUiSprite;
 
-    public float GetBulletsPerShoot => bulletsPerShoot; // Número de balas por disparo (para escopetas)
-    public float GetSpreadAngle => spreadAngle; // Ángulo de dispersión del arco de las balas
+    public float GetBulletsPerShoot => bulletsPerShoot; // Nï¿½mero de balas por disparo (para escopetas)
+    public float GetSpreadAngle => spreadAngle; // ï¿½ngulo de dispersiï¿½n del arco de las balas
     public GameObject GetBulletPrefab => bulletPrefab;
     public float GetRoundsBullets => roundsBullets;
     public float GetCadency => cadency;
@@ -29,5 +30,7 @@ public class WeaponData : ScriptableObject
     public AudioClip GetReloadSound => reloadSound;
 
     public Sprite GetWeaponSprite => weaponSprite;
+
+    public Sprite GetweaponUiSprite => weaponUiSprite;
 
 }

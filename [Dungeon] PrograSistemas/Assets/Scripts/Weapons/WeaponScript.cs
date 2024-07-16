@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class WeaponScript : MonoBehaviour,IGun
 
     private bool isShooting = false; // Bandera para controlar el estado de disparo
 
+    public event Action<Sprite> OnSpriteChanged;
+    
     private void Start()
     {
         bullets = new List<GameObject>();
@@ -33,15 +36,12 @@ public class WeaponScript : MonoBehaviour,IGun
         if (myAudio == null) return;
 
         ChangeWeaponSprite();
-
     }
 
     public void Shoot(Transform orig)
     {
-        if (!isShooting) // Solo disparar si no se está disparando actualmente
+        if (!isShooting) // Solo disparar si no se estï¿½ disparando actualmente
         {
-            
-
             if (weaponData.GetBulletsPerShoot > 1) 
             {
                 ShootShotgun(orig);
@@ -52,7 +52,6 @@ public class WeaponScript : MonoBehaviour,IGun
             }
             else
             {
-
                 GameObject bullet = GetPooledBullet();
                 if (bullet != null)
                 {
@@ -69,7 +68,7 @@ public class WeaponScript : MonoBehaviour,IGun
 
     public void ShootShotgun(Transform orig)
     {
-        if (!isShooting) // Solo disparar si no se está disparando actualmente
+        if (!isShooting) // Solo disparar si no se estï¿½ disparando actualmente
         {
             StartCoroutine(ShootShotgunCoroutine(orig));
         }
@@ -77,7 +76,7 @@ public class WeaponScript : MonoBehaviour,IGun
 
     private IEnumerator ShootShotgunCoroutine(Transform orig)
     {
-        isShooting = true; // Establecer la bandera a true para indicar que está disparando
+        isShooting = true; // Establecer la bandera a true para indicar que estï¿½ disparando
 
         float angleStep = weaponData.GetSpreadAngle / (weaponData.GetBulletsPerShoot - 1);
         float angle = -weaponData.GetSpreadAngle / 2;
@@ -119,9 +118,9 @@ public class WeaponScript : MonoBehaviour,IGun
 
     private IEnumerator ShootSmg(float delay, Transform orig)
     {
-        isShooting = true; // Establecer la bandera a true para indicar que está disparando
+        isShooting = true; // Establecer la bandera a true para indicar que estï¿½ disparando
 
-        for (int i = 0; i < weaponData.GetRoundsBullets; i++) // Cantidad de veces que disparará el arma (3 disparos - efecto ráfaga)
+        for (int i = 0; i < weaponData.GetRoundsBullets; i++) // Cantidad de veces que dispararï¿½ el arma (3 disparos - efecto rï¿½faga)
         {
             GameObject bullet = GetPooledBullet();
             if (bullet != null)
@@ -146,6 +145,7 @@ public class WeaponScript : MonoBehaviour,IGun
         if(spriteRenderer != null && weaponData != null) 
         {
             spriteRenderer.sprite = weaponData.GetWeaponSprite;
+            OnSpriteChanged?.Invoke(weaponData.GetweaponUiSprite);
         }
         PutReload();
     }
@@ -172,6 +172,5 @@ public class WeaponScript : MonoBehaviour,IGun
     {
         this.weaponData = weaponData;
         ChangeWeaponSprite();
-        
     }
 }
