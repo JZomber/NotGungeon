@@ -35,6 +35,11 @@ public class LifeManager : MonoBehaviour
         currentLife = maxLife;
     }
 
+    public bool CheckMaxHealth()
+    {
+        return currentLife == maxLife;
+    }
+
     public void TakeDamage(int damageAmount)
     {
         currentLife -= damageAmount;
@@ -54,14 +59,24 @@ public class LifeManager : MonoBehaviour
         }
     }
 
-    public void HealPlayer(int healAmount)
+    public void HealPlayer(int healAmount, GameObject obj)
     {
+        if (currentLife == maxLife)
+        {
+            return;
+        }
+        
         for (int i = 0; i < healAmount; i++)
         {
             if (currentLife < maxLife)
             {
                 OnHeartGained?.Invoke();
                 currentLife++;
+
+                if (obj)
+                {
+                    obj.SetActive(false);
+                }
             }
         }
     }

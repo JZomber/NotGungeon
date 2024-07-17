@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UI.PowerUps;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class UserInterfaceManager : MonoBehaviour
@@ -19,6 +20,7 @@ public class UserInterfaceManager : MonoBehaviour
 
     [Header("PowerUps Ui")] 
     [SerializeField] private Image powerUpUI;
+    [SerializeField] private Sprite defaultPowerUpSprite;
     [SerializeField] private Transform powerUpParent;
     private PowerUpsStack powerUpsStack;
 
@@ -26,6 +28,8 @@ public class UserInterfaceManager : MonoBehaviour
     
     void Start()
     {
+        defaultPowerUpSprite = powerUpUI.sprite;
+        
         weaponScript = FindObjectOfType<WeaponScript>();
         if (weaponScript != null)
         {
@@ -97,7 +101,14 @@ public class UserInterfaceManager : MonoBehaviour
 
     private void HandlerUpdatePowerUpUI(Sprite uiSprite)
     {
-        powerUpUI.sprite = uiSprite;
+        if (uiSprite)
+        {
+            powerUpUI.sprite = uiSprite;
+        }
+        else
+        {
+            powerUpUI.sprite = defaultPowerUpSprite;
+        }
     }
 
     private void HandlerUnsubscribeEvents()

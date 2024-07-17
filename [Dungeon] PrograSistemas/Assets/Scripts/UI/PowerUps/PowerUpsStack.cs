@@ -50,6 +50,7 @@ namespace UI.PowerUps
             if (powerUpsStack.Count == 0)
             {
                 currentPowerUp = null;
+                OnPowerUpChanged?.Invoke(null);
             }
             else
             {

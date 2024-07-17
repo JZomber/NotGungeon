@@ -17,8 +17,7 @@ public class Heal : MonoBehaviour
             if (lifeManager != null)
             {
                 // Curar al jugador
-                lifeManager.HealPlayer(healAmount);
-                gameObject.SetActive(false);
+                lifeManager.HealPlayer(healAmount, gameObject);
             }
             else
             {

@@ -9,7 +9,8 @@ using UnityEngine;
 public class PlayerPowerUps : MonoBehaviour
 {
     public GameObject shieldPrefab; //Prefab del escudo
-    private ShieldPowerUp shieldPowerUp; //Script del powerUp de escudo
+    private ShieldPowerUp shieldPowerUp; //Script del powerUp de 
+    private ShieldPowerUpData shieldPowerUpData;
     public bool isShieldActive; //Bool si est� activo el escudo
     
     private PowerUpsStack powerUpsStack; //Script de la lista de power ups
@@ -40,7 +41,6 @@ public class PlayerPowerUps : MonoBehaviour
             if (powerUp)
             {
                 powerUp.ApplyEffect(this);
-                powerUpsStack.RemovePowerUp(); //Quito el objeto del TDA Cola
             }
         }
 
@@ -53,7 +53,25 @@ public class PlayerPowerUps : MonoBehaviour
 
     public void Heal(int healAmount)
     {
-        lifeManager.HealPlayer(healAmount);
+        if (!lifeManager.CheckMaxHealth())
+        {
+            lifeManager.HealPlayer(healAmount, null);
+            powerUpsStack.RemovePowerUp();
+        }
+    }
+
+    public void ActivateShield(ShieldPowerUpData shieldData)
+    {
+        if (!shieldPrefab.activeInHierarchy)
+        {
+            shieldPowerUp.SetResistance(shieldData.GetDamageResistance);
+            
+            shieldPrefab.SetActive(true);
+            isShieldActive = true;
+            playerCollider.enabled = false;
+            
+            powerUpsStack.RemovePowerUp();
+        }
     }
     
     void OnTriggerEnter2D(Collider2D other)

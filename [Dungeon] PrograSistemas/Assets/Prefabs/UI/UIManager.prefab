@@ -66,7 +66,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 63d4b46ad21c3a544aa3ca19a64ff597, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0d36a93432872a245a029ba010cc884e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -631,6 +631,7 @@ MonoBehaviour:
   heartUI: {fileID: 6331390066630487331, guid: f98724ad0c748c24c85e6bf409b659b1, type: 3}
   heartParent: {fileID: 5293813211640394704}
   powerUpUI: {fileID: 3715309220766378621}
+  defaultPowerUpSprite: {fileID: 21300000, guid: 0d36a93432872a245a029ba010cc884e, type: 3}
   powerUpParent: {fileID: 5293813210656295095}
 --- !u!1 &5293813211640394705
 GameObject:
