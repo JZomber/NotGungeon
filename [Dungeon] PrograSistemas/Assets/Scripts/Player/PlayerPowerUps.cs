@@ -81,7 +81,7 @@ public class PlayerPowerUps : MonoBehaviour
             var powerUpPickup = other.GetComponent<PowerUpPickup>();
             if (powerUpPickup != null)
             {
-                powerUpsStack.AddPowerUp(powerUpPickup.powerUpData);
+                powerUpsStack.AddPowerUp(powerUpPickup.powerUpData, other.gameObject);
             }
         }
     }

@@ -36,7 +36,6 @@ public class PowerUpPickup : MonoBehaviour
         if (other.CompareTag("Player") || other.CompareTag("Shield"))
         {
             OnCollected?.Invoke(powerUpData);
-            gameObject.SetActive(false);
         }
     }
     

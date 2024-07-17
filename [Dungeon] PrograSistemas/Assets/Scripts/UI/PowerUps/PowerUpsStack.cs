@@ -22,7 +22,7 @@ namespace UI.PowerUps
             loadCharacterData = FindObjectOfType<LoadCharacterData>();
             if (loadCharacterData != null)
             {
-                loadCharacterData.OnSetStarterPowerUp += AddPowerUp;
+                loadCharacterData.OnSetStarterPowerUp += AddStarterPowerUp;
             }
 
             levelManager = FindObjectOfType<LevelManager>();
@@ -41,7 +41,13 @@ namespace UI.PowerUps
             return currentPowerUp;
         }
 
-        public void AddPowerUp(PowerUpData powerUp)
+        private void AddStarterPowerUp(PowerUpData powerUp)
+        {
+            powerUpsStack.Push(powerUp);
+            CheckUpdateList();
+        }
+
+        public void AddPowerUp(PowerUpData powerUp, GameObject obj)
         {
             if (powerUpsStack.Count >= maxSize)
             {
@@ -49,11 +55,12 @@ namespace UI.PowerUps
                 return;
             }
             
-            powerUpsStack.Push(powerUp); //Agrego la referencia del objeto a la lista
+            powerUpsStack.Push(powerUp);
+            obj.SetActive(false);
             CheckUpdateList();
         }
 
-        public void RemovePowerUp() //Quito el primer objeto que entr� a la lista
+        public void RemovePowerUp()
         {
             if (powerUpsStack.Count == 0)
             {
@@ -82,7 +89,7 @@ namespace UI.PowerUps
             loadCharacterData = FindObjectOfType<LoadCharacterData>();
             if (loadCharacterData != null)
             {
-                loadCharacterData.OnSetStarterPowerUp -= AddPowerUp;
+                loadCharacterData.OnSetStarterPowerUp -= AddStarterPowerUp;
             }
 
             levelManager = FindObjectOfType<LevelManager>();
