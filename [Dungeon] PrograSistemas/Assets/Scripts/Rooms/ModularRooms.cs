@@ -20,7 +20,7 @@ public class ModularRooms : MonoBehaviour
     private int maxEnemiesAmount;
     
     public static event Action<ModularRooms> OnPlayerEnteredRoom;
-    //public static event Action<ModularRooms> OnRoomUnlocked; //Si tiene que pasar algo cuando se desbloquea una sala.
+    //public static event Action<ModularRooms> OnRoomUnlocked; // If something has to happen when a room gets open.
     public event Action<List<GameObject>, List<Transform>> OnSpawnEnemiesRequest;
     
     [SerializeField] private RoomConfig roomConfig;
@@ -55,7 +55,6 @@ public class ModularRooms : MonoBehaviour
         }
     }
     
-    // Start is called before the first frame update
     void Start()
     {
         maxEnemiesAmount = enemySpawnsList.Count;
@@ -76,7 +75,7 @@ public class ModularRooms : MonoBehaviour
     {
         unlocked = true;
         UpdateExits();
-        //OnRoomUnlocked?.Invoke(this); //Si tiene que pasar algo cuando se desbloquea una sala.
+        //OnRoomUnlocked?.Invoke(this);
     }
 
     private void SelectDifficulty()
@@ -86,16 +85,14 @@ public class ModularRooms : MonoBehaviour
 
         if (selectedDifficulty == Difficulty.Easy)
         {
-            maxDifficultyPoints = roomConfig.easyDiffPoints;
-            //Debug.Log($"SALA {this} | DIFICULTAD {selectedDifficulty} | PUNTOS {maxDifficultyPoints}");
+            maxDifficultyPoints = roomConfig.GetEasyDiffPoints;
             
             hardRoomDesign.SetActive(false);
             easyRoomDesign.SetActive(true);
         }
         else
         {
-            maxDifficultyPoints = roomConfig.hardDiffPoints;
-            //Debug.Log($"SALA {this} | DIFICULTAD {selectedDifficulty} | PUNTOS {maxDifficultyPoints}");
+            maxDifficultyPoints = roomConfig.GetHardDiffPoints;
 
             hardRoomDesign.SetActive(true);
             easyRoomDesign.SetActive(false);
@@ -105,18 +102,11 @@ public class ModularRooms : MonoBehaviour
     private void EnemySelector()
     {
         var filteredEnemies = enemies;
-
-        //enemies.Where(e => selectedDifficulty == Difficulty.Hard || !e.isHardOnly);
         
         filteredEnemies.Shuffle();
 
         int totalDiffPoints = 0;
         int attempts = 0;
-
-        // for(int i = 0; i < filteredEnemies.Length; i++)
-        // {
-        //     Debug.Log($"Nombre: {filteredEnemies[i].enemyPrefab.name} | Posición: {i}");
-        // }
 
         while (totalDiffPoints != maxDifficultyPoints && attempts < filteredEnemies.Length)
         {
@@ -141,7 +131,6 @@ public class ModularRooms : MonoBehaviour
                     break;
                 }
             }
-            
             attempts++;
         }
         
@@ -191,7 +180,7 @@ public class ModularRooms : MonoBehaviour
     }
     
     #if UNITY_EDITOR
-    private void HandlerUpdateExits() //Utilizado para evitar llamadas al mismo frame que se actualiza el editor
+    private void HandlerUpdateExits()
     {
         EditorApplication.update -= HandlerUpdateExits;
         UpdateExits();
@@ -225,7 +214,6 @@ public class ModularRooms : MonoBehaviour
         public GameObject enemyPrefab;
         public int diffPoints;
         public int maxInstances = 1; // 1 Default
-        //public bool isHardOnly;
     }
     
     public enum Direction

@@ -5,23 +5,21 @@ using UnityEngine;
 
 public class Heal : MonoBehaviour
 {
-    public int healAmount = 1; // Cantidad de vida a curar
+    [SerializeField] private int healAmount = 1;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") || other.CompareTag("Shield"))
         {
-            // Obtener la instancia de LifeSystem
             LifeManager lifeManager = LifeManager.Instance;
 
             if (lifeManager != null)
             {
-                // Curar al jugador
-                lifeManager.HealPlayer(healAmount, gameObject);
+               lifeManager.HealPlayer(healAmount, gameObject);
             }
             else
             {
-                Debug.LogError("No se encontró la instancia de LifeSystem.");
+                Debug.LogError("Life system instance not found.");
             }
         }
     }

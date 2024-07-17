@@ -35,46 +35,22 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void HandlerVictoryScreen() //Pantalla de victoria
+    private void HandlerVictoryScreen() //Victory screen
     {
         StartCoroutine(LoadVictoryScreen(1.5f));
         
         OnLevelFinished?.Invoke();
 
         UnsubscribeEvents();
-
-        // if (BackgroundMusicManager.Instance != null)
-        // {
-        //     BackgroundMusicManager.Instance.StopMusic();
-        // }
-
-        //yield return new WaitForSeconds(1f);
-
-        // if (BackgroundMusicManager.Instance != null)
-        // {
-        //     BackgroundMusicManager.Instance.PlayVictorySound();
-        // }
     }
 
-    private void HandlerDefeatScreen() //Pantalla de derrota
+    private void HandlerDefeatScreen() //Defeat Screen
     {
         StartCoroutine(LoadDefeatScreen(1.5f));
         
         OnLevelFinished?.Invoke();
 
         UnsubscribeEvents();
-
-        // if (BackgroundMusicManager.Instance != null)
-        // {
-        //     BackgroundMusicManager.Instance.StopMusic();
-        // }
-
-        //yield return new WaitForSeconds(1f);
-
-        // if (BackgroundMusicManager.Instance != null)
-        // {
-        //     BackgroundMusicManager.Instance.PlayDefeatSound();
-        // }
     }
 
     private void HandlerMenuScreen()
@@ -90,7 +66,7 @@ public class LevelManager : MonoBehaviour
     {
         transition.SetTrigger("Start");
         
-        yield return new WaitForSeconds(delay); // Espera medio segundo antes de cargar la escena
+        yield return new WaitForSeconds(delay);
         
         SceneManager.LoadScene(levelData.MenuScene);
     }
@@ -99,7 +75,7 @@ public class LevelManager : MonoBehaviour
     {
         transition.SetTrigger("Start");
         
-        yield return new WaitForSeconds(delay); // Espera medio segundo antes de cargar la escena
+        yield return new WaitForSeconds(delay);
         
         SceneManager.LoadScene(levelData.VictoryScene);
     }
@@ -108,7 +84,7 @@ public class LevelManager : MonoBehaviour
     {
         transition.SetTrigger("Start");
         
-        yield return new WaitForSeconds(delay); // Espera medio segundo antes de cargar la escena
+        yield return new WaitForSeconds(delay);
         
         SceneManager.LoadScene(levelData.DefeatScene);
     }
