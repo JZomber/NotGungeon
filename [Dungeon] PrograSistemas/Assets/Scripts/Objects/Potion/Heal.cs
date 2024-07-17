@@ -11,7 +11,7 @@ public class Heal : MonoBehaviour
 
     private void Start()
     {
-        source = GameObject.FindGameObjectWithTag("PlayerObj").GetComponent<AudioSource>();
+        source = GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
