@@ -10384,7 +10384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bdc8891e03c27a4384394b5735d7d2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 5
+  maxLife: 50
   player: {fileID: 1565893358}
 --- !u!4 &1748143704
 Transform:

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8219614193824353484}
   - component: {fileID: 9049445262911459879}
   - component: {fileID: 9122107755746190370}
-  - component: {fileID: 7334845775022739202}
+  - component: {fileID: 7182141905015276639}
   - component: {fileID: 3789839195282543327}
   - component: {fileID: 5214162099761780278}
   - component: {fileID: 8976299049481680835}
@@ -125,10 +125,10 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0017905012, y: 0.0041712224}
-  m_Size: {x: 0.24358101, y: 0.32346672}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.2, y: 0.3}
   m_Direction: 0
---- !u!95 &7334845775022739202
+--- !u!95 &7182141905015276639
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ Animator:
   m_GameObject: {fileID: 3597663157497284692}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 40ae47b6126b8364ca06fcfc1c7b8d91, type: 2}
+  m_Controller: {fileID: 9100000, guid: de034c99206be414480b2a1fb59927b7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -184,6 +184,7 @@ MonoBehaviour:
   isAlive: 1
   isRangedEnemy: 1
   player: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+  isFaceRight: 0
 --- !u!114 &8976299049481680835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +197,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ec6970b280390541b9817905a0b4b8b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemys: []
+  enemyScript: {fileID: 0}
+  transforms: []
+  doors: {fileID: 0}
 --- !u!1 &4794874999878437163
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 3597663157497284692}
+  weapon: {fileID: 0}
 --- !u!1001 &2867145562532337674
 PrefabInstance:
   m_ObjectHideFlags: 0

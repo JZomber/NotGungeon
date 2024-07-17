@@ -33,6 +33,7 @@ public class EnemyMage : MonoBehaviour
         isAlive = true;
         currentHealth = health;
         spawnPoint = transform.position;
+        animator.SetBool("isAlive", isAlive);
         
         if (enemyManager == null)
         {
@@ -152,6 +153,7 @@ public class EnemyMage : MonoBehaviour
             isAlive = false;
             capsuleCollider2D.enabled = isAlive;
             enemyShield.SetActive(isAlive);
+            animator.SetBool("isAlive", isAlive);
             animator.SetTrigger("isDead");
 
             // Reproduce el sonido de muerte del enemigo esqueleto
