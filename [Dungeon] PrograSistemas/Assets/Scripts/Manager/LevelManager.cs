@@ -7,8 +7,10 @@ public class LevelManager : MonoBehaviour
 {
     [SerializeField] private Animator transition;
     [SerializeField] private LevelData levelData;
+    
     private LifeManager lifeManager;
     private PlayerMov playerMov;
+    private PauseMenu pauseMenu;
 
     public event Action OnLevelFinished;
 
@@ -24,6 +26,12 @@ public class LevelManager : MonoBehaviour
         if (playerMov != null)
         {
             playerMov.OnPlayerVictory += HandlerVictoryScreen;
+        }
+
+        pauseMenu = FindObjectOfType<PauseMenu>();
+        if (pauseMenu != null)
+        {
+            pauseMenu.OnMenuRequest += HandlerMenuScreen;
         }
     }
 
@@ -68,6 +76,24 @@ public class LevelManager : MonoBehaviour
         //     BackgroundMusicManager.Instance.PlayDefeatSound();
         // }
     }
+
+    private void HandlerMenuScreen()
+    {
+        StartCoroutine(LoadMenuScreen(1.5f));
+        
+        OnLevelFinished?.Invoke();
+        
+        UnsubscribeEvents();
+    }
+    
+    private IEnumerator LoadMenuScreen(float delay)
+    {
+        transition.SetTrigger("Start");
+        
+        yield return new WaitForSeconds(delay); // Espera medio segundo antes de cargar la escena
+        
+        SceneManager.LoadScene(levelData.MenuScene);
+    }
     
     private IEnumerator LoadVictoryScreen(float delay)
     {
@@ -99,6 +125,12 @@ public class LevelManager : MonoBehaviour
         if (playerMov != null)
         {
             playerMov.OnPlayerVictory -= HandlerVictoryScreen;
+        }
+        
+        pauseMenu = FindObjectOfType<PauseMenu>();
+        if (pauseMenu != null)
+        {
+            pauseMenu.OnMenuRequest += HandlerMenuScreen;
         }
     }
 }
