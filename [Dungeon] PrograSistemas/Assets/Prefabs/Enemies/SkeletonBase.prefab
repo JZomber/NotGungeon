@@ -212,6 +212,7 @@ MonoBehaviour:
   weapon: {fileID: 4325558759717067236}
   canShoot: 1
   isWeaponActive: 1
+  clip: {fileID: 8300000, guid: 5ffc2e169fd0bbf4ebd77395c87b9ff0, type: 3}
 --- !u!95 &461635680555895
 Animator:
   serializedVersion: 5

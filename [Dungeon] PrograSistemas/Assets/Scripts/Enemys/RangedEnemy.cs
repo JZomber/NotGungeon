@@ -17,6 +17,8 @@ public class RangedEnemy : MonoBehaviour
     public bool canShoot = true;
     public bool isWeaponActive = true;
 
+    AudioSource source;
+    [SerializeField]AudioClip clip;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +38,7 @@ public class RangedEnemy : MonoBehaviour
             shootingOrig[i] = weapon.transform.GetChild(i).transform; //Obtengo la posici�n de cada origen
         }
         
+        source = GetComponent<AudioSource>();
     }
     
     // Update is called once per frame
@@ -50,6 +53,10 @@ public class RangedEnemy : MonoBehaviour
                 var rotation = shootingOrig[i].rotation;
                 rotation *= Quaternion.Euler(0, 0, -90);
                 Instantiate(bulletPrefab, shootingOrig[i].position, rotation);
+                if (source != null && clip != null)
+                {
+                    source.PlayOneShot(clip);
+                }
             }
             
             coolDown = shootCoolDown;
@@ -71,6 +78,10 @@ public class RangedEnemy : MonoBehaviour
             var rotation = shootingOrig[0].rotation;
             rotation *= Quaternion.Euler(0, 0, -90);
             Instantiate(bulletPrefab, shootingOrig[0].position, rotation);
+            if (source != null && clip != null)
+            {
+                source.PlayOneShot(clip);
+            }
         }
     }
 

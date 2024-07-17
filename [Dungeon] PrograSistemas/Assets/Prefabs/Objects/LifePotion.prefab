@@ -115,3 +115,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healAmount: 1
+  clip: {fileID: 8300000, guid: 7fd62b86614f6e24bb979f85efab7fbe, type: 3}

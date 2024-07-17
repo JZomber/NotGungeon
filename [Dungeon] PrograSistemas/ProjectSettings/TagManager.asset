@@ -18,6 +18,7 @@ TagManager:
   - Victory
   - Wall
   - EnemyShield
+  - PlayerObj
   layers:
   - Default
   - TransparentFX

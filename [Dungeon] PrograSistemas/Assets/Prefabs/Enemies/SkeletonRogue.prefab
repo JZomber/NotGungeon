@@ -168,6 +168,7 @@ MonoBehaviour:
   weapon: {fileID: 6470191102553398022}
   canShoot: 1
   isWeaponActive: 1
+  clip: {fileID: 8300000, guid: 25df380368c3d644b87790cae99be885, type: 3}
 --- !u!114 &8105829387005961122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,7 +199,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.358
   m_Pitch: 1
   Loop: 0
   Mute: 0
