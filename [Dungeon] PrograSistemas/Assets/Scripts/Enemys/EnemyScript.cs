@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class EnemyScript : MonoBehaviour
     private Animator animator;
     private CapsuleCollider2D capsuleCollider2D;
 
+    public float GetCurrentHealth => currentHealth;
+
     [Header("Player")]
     public GameObject player;
     private float distance;
@@ -24,6 +27,7 @@ public class EnemyScript : MonoBehaviour
     public event Action<GameObject> OnEnemyKilled;
     public event Action OnEnemyRevived;
     public bool isFaceRight;
+
 
     private void Start()
     {

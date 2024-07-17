@@ -4,44 +4,73 @@ using UnityEngine;
 
 public class BossScript : MonoBehaviour
 {
-    public float disappearTime = 2f; // Tiempo que el enemigo permanece desaparecido
-    public float appearTime = 5f; // Tiempo que el enemigo permanece visible
+    SpriteRenderer spriteRenderer;
+    
+    CapsuleCollider2D capsuleCollider;
+    [SerializeField] List<GameObject> enemys;
+    [SerializeField] EnemyScript enemyScript;
+    [SerializeField] List<Transform> transforms;
+    [SerializeField] GameObject doors;
+    RangedEnemy rangedEnemy;
+    float maxHealth;
+    bool isHalfLife;
+    bool isSecondBase = false;
 
-    private Renderer enemyRenderer;
-    private Collider enemyCollider;
-
-    void Start()
+    private void Start()
     {
-        enemyRenderer = GetComponent<Renderer>();
-        enemyCollider = GetComponent<Collider>();
-
-        if (enemyRenderer == null || enemyCollider == null)
-        {
-            Debug.LogError("El enemigo necesita un Renderer y un Collider.");
-            return;
-        }
-
-        // Iniciar el ciclo de aparecer/desaparecer
-        StartCoroutine(BlinkRoutine());
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
+        enemyScript = GetComponent<EnemyScript>();
+        rangedEnemy = GetComponent<RangedEnemy>();
+        maxHealth = enemyScript.health;
+        isHalfLife = false;
+        rangedEnemy.isWeaponActive = false;
     }
 
-    IEnumerator BlinkRoutine()
+    private void Update()
     {
-        while (true)
+        if (enemyScript != null) 
         {
-            // Desaparecer
-            SetEnemyActive(false);
-            yield return new WaitForSeconds(disappearTime);
+            
+            if (enemyScript.GetCurrentHealth < maxHealth / 2 && !isHalfLife) 
+            {
+                Debug.Log("Bajo la vida a la mitad");
+                isHalfLife=true;
+                ActiveBoss();
+                for (int i = 0; i < enemys.Count; i++)
+                {
+                    enemys[i].SetActive(true);
+                }
+            } 
 
-            // Aparecer
-            SetEnemyActive(true);
-            yield return new WaitForSeconds(appearTime);
+            if (isHalfLife) 
+            {
+                Debug.Log("isHalfLife");
+                bool allInactive = true;
+
+                foreach (GameObject go in enemys)
+                {
+                    if (go.activeSelf)
+                    {
+                        allInactive = false;
+                        break;
+                    }
+                }
+
+                if (allInactive||enemyScript.GetCurrentHealth <=0) 
+                {
+                    doors.SetActive(false);
+                }
+                
+            }
         }
     }
 
-    void SetEnemyActive(bool isActive)
+
+    void ActiveBoss() 
     {
-        enemyRenderer.enabled = isActive;
-        enemyCollider.enabled = isActive;
+        
+        int random = Random.Range(0, transforms.Count);
+        transform.position = transforms[random].position;
     }
 }
