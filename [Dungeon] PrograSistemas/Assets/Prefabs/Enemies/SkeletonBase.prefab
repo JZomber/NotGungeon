@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 706128051973422528}
+  weapon: {fileID: 4325558759717067236}
 --- !u!1 &706128051973422528
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,6 +193,7 @@ MonoBehaviour:
   isAlive: 1
   isRangedEnemy: 1
   player: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+  isFaceRight: 0
 --- !u!114 &5771353771080875476
 MonoBehaviour:
   m_ObjectHideFlags: 0

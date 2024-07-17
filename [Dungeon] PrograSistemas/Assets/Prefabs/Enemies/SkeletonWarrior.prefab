@@ -185,6 +185,7 @@ MonoBehaviour:
   isAlive: 1
   isRangedEnemy: 1
   player: {fileID: 2705700512366788034, guid: 9cb8349941356ed45b46d8de5e52308e, type: 3}
+  isFaceRight: 0
 --- !u!82 &1031373998067330316
 AudioSource:
   m_ObjectHideFlags: 0
@@ -327,6 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 706128051973422528}
+  weapon: {fileID: 2516483886680094239}
 --- !u!1001 &2300206494083280286
 PrefabInstance:
   m_ObjectHideFlags: 0

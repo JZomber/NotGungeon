@@ -29,6 +29,21 @@ public class EnemyScript : MonoBehaviour
     {
         EnemySetup();
         //soundManager = SoundManager.Instance; // Obtener instancia del SoundManager
+        if (player)
+        {
+            if (player.transform.position.x > transform.position.x && isFaceRight)
+            {
+
+                Flip();
+            }
+
+            if (player.transform.position.x < transform.position.x && !isFaceRight)
+            {
+
+                Flip();
+            };
+        }
+         
     }
 
     void Update()
@@ -44,30 +59,29 @@ public class EnemyScript : MonoBehaviour
                 transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
             }
 
-            if (player.transform.position.x > transform.position.x && isFaceRight)
-            {
-                isFaceRight = false;
-                transform.rotation = Quaternion.Euler(transform.rotation.x , transform.rotation.y + 180f, transform.rotation.z);
-            }
-            else if (player.transform.position.x < transform.position.x && !isFaceRight) 
-            {
-                isFaceRight = true;
-                transform.rotation = Quaternion.Euler(transform.rotation.x , transform.rotation.y + 180f, transform.rotation.z);
-            } ;
+            
             
         }
 
         
     }
 
-    private bool isFaceRightPlayer() 
+    void Flip()
     {
-        if (player == null) 
+        // Invierte la rotación en el eje Y
+        
+        if (transform.rotation.y >= 180)
         {
-            return false;
+            isFaceRight = false;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 180f, transform.rotation.eulerAngles.z);
         }
-        return player.transform.position.x < transform.position.x;
+        else 
+        {
+            isFaceRight = true;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180f, transform.rotation.eulerAngles.z);
+        }
     }
+
     private void EnemySetup()
     {
         isAlive = true;
