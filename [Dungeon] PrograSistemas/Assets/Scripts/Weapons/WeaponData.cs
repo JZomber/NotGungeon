@@ -19,8 +19,8 @@ public class WeaponData : ScriptableObject
     [SerializeField] private Sprite weaponSprite;
     [SerializeField] private Sprite weaponUiSprite;
 
-    public float GetBulletsPerShoot => bulletsPerShoot; // N�mero de balas por disparo (para escopetas)
-    public float GetSpreadAngle => spreadAngle; // �ngulo de dispersi�n del arco de las balas
+    public float GetBulletsPerShoot => bulletsPerShoot;
+    public float GetSpreadAngle => spreadAngle;
     public GameObject GetBulletPrefab => bulletPrefab;
     public float GetRoundsBullets => roundsBullets;
     public float GetCadency => cadency;
