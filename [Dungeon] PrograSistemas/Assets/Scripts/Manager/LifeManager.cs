@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class LifeManager : MonoBehaviour
 {
-    [SerializeField] private int maxLife; // Cantidad máxima de vida
+    [SerializeField] private int maxLife;
     public int GetMaxLife => maxLife;
     
-    private int currentLife; // Vida actual
-    [SerializeField] private GameObject player; // Referencia al jugador
+    private int currentLife;
+    [SerializeField] private GameObject player;
     private LoadCharacterData loadCharacterData;
 
     private LevelManager levelManager;

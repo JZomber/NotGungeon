@@ -21,7 +21,7 @@ public class PlayerMov : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void Update()
     {
         if (!isDead)
         {

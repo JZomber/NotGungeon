@@ -42,12 +42,10 @@ public class EnemyManager : MonoBehaviour
                 {
                     enemyScript.OnEnemyKilled += HandlerEnemyKilled;
                     enemyScript.OnEnemyRevived += HandlerEnemyRevived;
-                    //Debug.Log($"Subscripto al enemigo {enemyScript.GameObject()}");
                 }
                 else if (enemyMage != null)
                 {
                     enemyMage.OnMageKilled += HandlerEnemyKilled;
-                    //Debug.Log("Subscripto al mago");
                 }
             }
         }
@@ -60,7 +58,6 @@ public class EnemyManager : MonoBehaviour
         }
     }
     
-    // Start is called before the first frame update
     private void Start()
     {
         modularRooms = FindObjectsOfType<ModularRooms>();
@@ -68,7 +65,6 @@ public class EnemyManager : MonoBehaviour
         foreach (ModularRooms rooms in modularRooms)
         {
             rooms.OnSpawnEnemiesRequest += HandleSpawnEnemies;
-            //Debug.Log("Subscripto a SpawnRequest");
         }
     }
 
@@ -97,11 +93,9 @@ public class EnemyManager : MonoBehaviour
             GameObject enemy = GetEnemyFromPool(enemies[i]);
             enemy.transform.position = spawns[i].position;
             enemy.SetActive(true);
-            //enemy.GetComponent<EnemyScript>().OnEnemyKilled += HandlerEnemyDeath;
         }
 
         activeEnemyAmount = enemies.Count;
-        //Debug.Log($"Objetivo de enemigos {activeEnemyAmount}");
     }
 
     private GameObject GetSpawnerFromPool()
@@ -157,8 +151,6 @@ public class EnemyManager : MonoBehaviour
     
     private void HandlerEnemyKilled(GameObject obj)
     {
-        //Debug.Log($"ENEMIGO {obj} ELIMINADO");
-
         OnMageCalled?.Invoke(obj);
         activeEnemyAmount--;
 
@@ -177,7 +169,6 @@ public class EnemyManager : MonoBehaviour
 
     private void UnsubscribeFromEvents()
     {
-        //OnSpawnEnemies -= HandleSpawnEnemies;
         if (modularRooms != null)
         {
             foreach (ModularRooms rooms in modularRooms)
@@ -199,14 +190,11 @@ public class EnemyManager : MonoBehaviour
                     {
                         enemyScript.OnEnemyKilled -= HandlerEnemyKilled;
                         enemyScript.OnEnemyRevived -= HandlerEnemyRevived;
-                        //Debug.Log($"Desubscripto al enemigo {enemyScript.GameObject()}");
                     }
                     else if (enemyMage != null)
                     {
                         enemyMage.OnMageKilled -= HandlerEnemyKilled;
-                        //Debug.Log("Desubscripto al mago");
                     }
-                    
                 }
             }
         }

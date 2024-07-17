@@ -5,22 +5,21 @@ using UnityEngine;
 
 public class RangedEnemy : MonoBehaviour
 {
-    [SerializeField] private Transform[] shootingOrig; //Origen de las balas
-    [SerializeField] private GameObject bulletPrefab; //Prefab de bullet (enemy)
-    private int totalShootOrigin; //Total de or�genes (depende del arma)
+    [SerializeField] private Transform[] shootingOrig;
+    [SerializeField] private GameObject bulletPrefab;
+    private int totalShootOrigin;
 
     private float coolDown;
     [SerializeField] private float shootCoolDown;
 
-    [SerializeField] private GameObject weapon; //Prefab del arma
+    [SerializeField] private GameObject weapon; // Prefab
     private bool isSmg;
     public bool canShoot = true;
     public bool isWeaponActive = true;
 
     AudioSource source;
     [SerializeField]AudioClip clip;
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         if (weapon.GameObject().name == "BasicSMG")
@@ -28,20 +27,19 @@ public class RangedEnemy : MonoBehaviour
             isSmg = true;
         }
         
-        coolDown = shootCoolDown; //Cooldown entre disparos
+        coolDown = shootCoolDown;
 
-        totalShootOrigin = weapon.transform.childCount; //Obtengo el n�mero de or�genes de balas
-        shootingOrig = new Transform[totalShootOrigin]; //Inicializo la lista seg�n la cantidad
+        totalShootOrigin = weapon.transform.childCount;
+        shootingOrig = new Transform[totalShootOrigin];
 
         for (int i = 0; i < totalShootOrigin; i++)
         {
-            shootingOrig[i] = weapon.transform.GetChild(i).transform; //Obtengo la posici�n de cada origen
+            shootingOrig[i] = weapon.transform.GetChild(i).transform;
         }
         
         source = GetComponent<AudioSource>();
     }
     
-    // Update is called once per frame
     void Update()
     {
         coolDown -= Time.deltaTime;
@@ -63,7 +61,7 @@ public class RangedEnemy : MonoBehaviour
         }
         else if (coolDown <= 0f && canShoot && isSmg)
         {
-            StartCoroutine(ShootSMG(0.2f)); //Delay entre disparos
+            StartCoroutine(ShootSMG(0.2f));
             
             coolDown = shootCoolDown;
         }
@@ -71,7 +69,7 @@ public class RangedEnemy : MonoBehaviour
 
     private IEnumerator ShootSMG(float delay)
     {
-        for (int i = 0; i < 3; i++) //Cantidad de veces que disparar� el arma (3 disparos - efecto r�faga)
+        for (int i = 0; i < 3; i++)
         {
             yield return new WaitForSeconds(delay);
         

@@ -8,8 +8,8 @@ namespace UI.PowerUps
 {
     public class PowerUpsStack : MonoBehaviour
     {
-        private Stack<PowerUpData> powerUpsStack = new Stack<PowerUpData>(); //Cola de powerUps
-        private int maxSize = 3; // Tamaño del array
+        private Stack<PowerUpData> powerUpsStack = new Stack<PowerUpData>();
+        private int maxSize = 3;
         [SerializeField] private PowerUpData currentPowerUp;
         
         private LoadCharacterData loadCharacterData;

@@ -26,7 +26,7 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (Mouse.current.leftButton.wasPressedThisFrame && canShoot)
         {

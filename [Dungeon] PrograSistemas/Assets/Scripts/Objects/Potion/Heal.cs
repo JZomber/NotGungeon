@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Heal : MonoBehaviour
 {
-    public int healAmount = 1; // Cantidad de vida a curar
+    [SerializeField] private int healAmount = 1;
     AudioSource source;
     [SerializeField] AudioClip clip;
 
