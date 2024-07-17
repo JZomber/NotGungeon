@@ -23,6 +23,7 @@ public class EnemyScript : MonoBehaviour
 
     public event Action<GameObject> OnEnemyKilled;
     public event Action OnEnemyRevived;
+    public bool isFaceRight;
 
     private void Start()
     {
@@ -34,6 +35,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (player)
         {
+            
             // Perseguir al Jugador
             distance = Vector2.Distance(transform.position, player.transform.position);
 
@@ -41,9 +43,31 @@ public class EnemyScript : MonoBehaviour
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
             }
+
+            if (player.transform.position.x > transform.position.x && isFaceRight)
+            {
+                isFaceRight = false;
+                transform.rotation = Quaternion.Euler(transform.rotation.x , transform.rotation.y + 180f, transform.rotation.z);
+            }
+            else if (player.transform.position.x < transform.position.x && !isFaceRight) 
+            {
+                isFaceRight = true;
+                transform.rotation = Quaternion.Euler(transform.rotation.x , transform.rotation.y + 180f, transform.rotation.z);
+            } ;
+            
         }
+
+        
     }
 
+    private bool isFaceRightPlayer() 
+    {
+        if (player == null) 
+        {
+            return false;
+        }
+        return player.transform.position.x < transform.position.x;
+    }
     private void EnemySetup()
     {
         isAlive = true;
