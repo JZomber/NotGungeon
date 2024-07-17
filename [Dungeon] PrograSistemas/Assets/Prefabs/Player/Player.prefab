@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 2705700512366788034}
+  weapon: {fileID: 5904911308614289025}
 --- !u!114 &1099544301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -435,6 +436,10 @@ PrefabInstance:
     - target: {fileID: 6844201568584190483, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7395765993182051210, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.68
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 562c264c3d260c744a32726ce687a3e4, type: 3}
