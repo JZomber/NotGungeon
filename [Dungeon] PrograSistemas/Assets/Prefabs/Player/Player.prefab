@@ -18,8 +18,9 @@ GameObject:
   - component: {fileID: 8826130604632612161}
   - component: {fileID: 8704498652214533481}
   - component: {fileID: 59550346868365923}
+  - component: {fileID: 4529613460608123653}
   m_Layer: 0
-  m_Name: PlayerRogue
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,12 +85,12 @@ SpriteRenderer:
   m_SortingLayerID: -2107138869
   m_SortingLayer: 6
   m_SortingOrder: 1
-  m_Sprite: {fileID: -418755991, guid: bc1d8951e8c6dac44b8eaf3ac4ea8793, type: 3}
+  m_Sprite: {fileID: -9095717837082945937, guid: 7198337eb4c248d4493f12e9c40fd74b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -203,7 +204,7 @@ Animator:
   m_GameObject: {fileID: 2705700512366788034}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4a158e3e7b932e845946fd75e4cd473c, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -231,6 +232,19 @@ MonoBehaviour:
   cooldownTime: 3
   slowMotionScale: 0.5
   powerIndicator: {fileID: 0}
+--- !u!114 &4529613460608123653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705700512366788034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a95e80822abaa4a998546bcdc38827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedCharacter: {fileID: 11400000, guid: 6bf58e34c7055bf4bb220e224445b839, type: 2}
 --- !u!1 &4919538022471709382
 GameObject:
   m_ObjectHideFlags: 0

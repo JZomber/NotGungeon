@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UI.PowerUps;
 using UnityEngine;
@@ -25,39 +27,54 @@ public class UserInterfaceManager : MonoBehaviour
     private PowerUpsStack powerUpsStack;
 
     private LevelManager levelManager;
-    
-    void Start()
+
+    private void Awake()
     {
-        defaultPowerUpSprite = powerUpUI.sprite;
-        
         weaponScript = FindObjectOfType<WeaponScript>();
         if (weaponScript != null)
         {
             weaponScript.OnSpriteChanged += HandlerUpdateWeaponUI;
         }
-
+        
         lifeManager = FindObjectOfType<LifeManager>();
         if (lifeManager != null)
         {
             lifeManager.OnHeartLost += HandlerLostHeart;
             lifeManager.OnHeartGained += HandlerGainedHeart;
-            
-            heartsMaxAmount = lifeManager.GetMaxLife;
-            InstantiateHearts();
         }
-
+        
         powerUpsStack = FindObjectOfType<PowerUpsStack>();
         if (powerUpsStack != null)
         {
             powerUpsStack.OnPowerUpChanged += HandlerUpdatePowerUpUI;
         }
-
+        
         levelManager = FindObjectOfType<LevelManager>();
         if (levelManager != null)
         {
             levelManager.OnLevelFinished += HandlerUnsubscribeEvents;
         }
     }
+
+    void Start()
+    {
+        defaultPowerUpSprite = powerUpUI.sprite;
+
+        if (lifeManager != null)
+        {
+            StartCoroutine(CheckMaxHealth());
+        }
+    }
+
+    private IEnumerator CheckMaxHealth()
+    {
+        yield return new WaitForSeconds(0.1f);
+        
+        heartsMaxAmount = lifeManager.GetMaxLife;
+        
+        InstantiateHearts();
+    }
+    
     private void InstantiateHearts()
     {
         float offsetX = 100f;

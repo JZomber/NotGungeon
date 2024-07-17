@@ -11,9 +11,27 @@ namespace UI.PowerUps
         private Stack<PowerUpData> powerUpsStack = new Stack<PowerUpData>(); //Cola de powerUps
         private int maxSize = 3; // Tamaño del array
         public PowerUpData currentPowerUp;
+        
+        private LoadCharacterData loadCharacterData;
+        private LevelManager levelManager;
 
         public event Action<Sprite> OnPowerUpChanged;
-        
+
+        private void Awake()
+        {
+            loadCharacterData = FindObjectOfType<LoadCharacterData>();
+            if (loadCharacterData != null)
+            {
+                loadCharacterData.OnSetStarterPowerUp += AddPowerUp;
+            }
+
+            levelManager = FindObjectOfType<LevelManager>();
+            if (levelManager != null)
+            {
+                levelManager.OnLevelFinished += HandlerUnsubscribeEvents;
+            }
+        }
+
         public PowerUpData CheckCurrentPowerUp()
         {
             if (powerUpsStack.Count == 0)
@@ -56,6 +74,21 @@ namespace UI.PowerUps
             {
                 currentPowerUp = powerUpsStack.Peek();
                 OnPowerUpChanged?.Invoke(currentPowerUp.GetPowerUpIcon);
+            }
+        }
+
+        private void HandlerUnsubscribeEvents()
+        {
+            loadCharacterData = FindObjectOfType<LoadCharacterData>();
+            if (loadCharacterData != null)
+            {
+                loadCharacterData.OnSetStarterPowerUp -= AddPowerUp;
+            }
+
+            levelManager = FindObjectOfType<LevelManager>();
+            if (levelManager != null)
+            {
+                levelManager.OnLevelFinished -= HandlerUnsubscribeEvents;
             }
         }
     }

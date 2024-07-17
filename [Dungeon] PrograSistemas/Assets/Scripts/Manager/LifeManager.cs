@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
 public class LifeManager : MonoBehaviour
@@ -8,6 +9,9 @@ public class LifeManager : MonoBehaviour
     
     private int currentLife; // Vida actual
     [SerializeField] private GameObject player; // Referencia al jugador
+    private LoadCharacterData loadCharacterData;
+
+    private LevelManager levelManager;
 
     public event Action OnHeartLost;
     public event Action OnHeartGained;
@@ -30,8 +34,24 @@ public class LifeManager : MonoBehaviour
         }
     }
 
-    void Start()
+    private void Awake()
     {
+        loadCharacterData = FindObjectOfType<LoadCharacterData>();
+        if (loadCharacterData != null)
+        {
+            loadCharacterData.OnSetMaxLife += SetMaxLife;
+        }
+
+        levelManager = FindObjectOfType<LevelManager>();
+        if (levelManager != null)
+        {
+            levelManager.OnLevelFinished += HandlerUnsubscribeEvents;
+        }
+    }
+
+    private void SetMaxLife(int amount)
+    {
+        maxLife = amount;
         currentLife = maxLife;
     }
 
@@ -78,6 +98,21 @@ public class LifeManager : MonoBehaviour
                     obj.SetActive(false);
                 }
             }
+        }
+    }
+    
+    private void HandlerUnsubscribeEvents()
+    {
+        loadCharacterData = FindObjectOfType<LoadCharacterData>();
+        if (loadCharacterData != null)
+        {
+            loadCharacterData.OnSetMaxLife -= SetMaxLife;
+        }
+
+        levelManager = FindObjectOfType<LevelManager>();
+        if (levelManager != null)
+        {
+            levelManager.OnLevelFinished -= HandlerUnsubscribeEvents;
         }
     }
 }
