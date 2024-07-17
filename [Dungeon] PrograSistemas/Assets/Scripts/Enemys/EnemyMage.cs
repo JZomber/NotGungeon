@@ -11,6 +11,8 @@ public class EnemyMage : MonoBehaviour
     public bool isAlive;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject enemyShield;
+    private float damageCooldownTime = 0.1f;
+    private bool canTakeDamage = true;
     [SerializeField] private EnemyManager enemyManager;
     private CapsuleCollider2D capsuleCollider2D;
     private Vector2 spawnPoint;
@@ -142,10 +144,11 @@ public class EnemyMage : MonoBehaviour
 
     public void EnemyDamage(int damage)
     {
-        if (isAlive)
+        if (isAlive && canTakeDamage)
         {
             currentHealth -= damage;
-            
+            canTakeDamage = false;
+            StartCoroutine(ResetDamageCooldown());
         }
 
         if (currentHealth <= 0 && isAlive)
@@ -162,16 +165,18 @@ public class EnemyMage : MonoBehaviour
             OnMageKilled?.Invoke(gameObject);
             enemyManager.OnMageCalled -= HandlerGetNewTarget;
         }
-        else 
-        {
-            animator.SetTrigger("Damaged");
-        }
     }
     
     private void HandlerEnemyDespawn()
     {
         animator.SetTrigger("despawn");
         enemyManager.OnEnemyDespawn -= HandlerEnemyDespawn;
+    }
+    
+    private IEnumerator ResetDamageCooldown()
+    {
+        yield return new WaitForSeconds(damageCooldownTime);
+        canTakeDamage = true;
     }
 
     private void OnEnable()

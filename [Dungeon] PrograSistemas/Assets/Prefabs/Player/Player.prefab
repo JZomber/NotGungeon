@@ -16,9 +16,9 @@ GameObject:
   - component: {fileID: 4665514447072346036}
   - component: {fileID: 550388217809543280}
   - component: {fileID: 8826130604632612161}
-  - component: {fileID: 8704498652214533481}
   - component: {fileID: 59550346868365923}
   - component: {fileID: 4529613460608123653}
+  - component: {fileID: 8704498652214533481}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -194,27 +194,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shieldPrefab: {fileID: 4882282971608238334}
   isShieldActive: 0
---- !u!95 &8704498652214533481
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2705700512366788034}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &59550346868365923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,6 +224,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectedCharacter: {fileID: 11400000, guid: 6bf58e34c7055bf4bb220e224445b839, type: 2}
+--- !u!95 &8704498652214533481
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2705700512366788034}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4919538022471709382
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,6 +292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   user: {fileID: 2705700512366788034}
+  weapon: {fileID: 5904911308614289025}
 --- !u!114 &1099544301
 MonoBehaviour:
   m_ObjectHideFlags: 0

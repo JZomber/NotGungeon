@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b33247b81676543b7b5c6367cf6674, type: 3}
   m_Name: SelectedCharacterData
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  maxLife: 0
-  starterPowerUp: {fileID: 0}
+  animatorController: {fileID: 9100000, guid: 4a158e3e7b932e845946fd75e4cd473c, type: 2}
+  maxLife: 6
+  starterPowerUp: {fileID: 11400000, guid: 1d2ef0645e3acf542acfc6f93a5f14fc, type: 2}
   isCharacterSelected: 0

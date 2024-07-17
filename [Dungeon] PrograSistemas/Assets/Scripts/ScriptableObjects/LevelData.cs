@@ -24,6 +24,9 @@ public class LevelData : ScriptableObject
     private bool tutorialRun;
     public bool IsTutorialRun => tutorialRun;
 
+    private string lastLevelName;
+    public string GetLastLevelName => lastLevelName;
+
     public string NewGameplay()
     {
         if (tutorialRun)
@@ -33,6 +36,7 @@ public class LevelData : ScriptableObject
         
         currentLevelIndex = 1;
         var level = $"Level_{currentLevelIndex}";
+        lastLevelName = level;
         return level;
     }
 
@@ -50,8 +54,7 @@ public class LevelData : ScriptableObject
             tutorialRun = false;
         }
         
-        var level = $"Level_{currentLevelIndex}";
-        return level;
+        return lastLevelName;
     }
 
     public string LoadNextLevel()
@@ -64,12 +67,14 @@ public class LevelData : ScriptableObject
         if (currentLevelIndex == 3)
         {
             var level = bossScene;
+            lastLevelName = bossScene;
             return level;
         }
         else
         {
             currentLevelIndex++;
             var level = $"Level_{currentLevelIndex}";
+            lastLevelName = level;
             return level;
         }
     }

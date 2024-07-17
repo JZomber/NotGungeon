@@ -10,7 +10,7 @@ public class EnemyScript : MonoBehaviour
     private float currentHealth;
     public float speed;
     public bool isAlive = true;
-    private float damageCooldownTime = 0.2f;
+    private float damageCooldownTime = 0.1f;
     private bool canTakeDamage = true;
     public bool isRangedEnemy;
     private Animator animator;

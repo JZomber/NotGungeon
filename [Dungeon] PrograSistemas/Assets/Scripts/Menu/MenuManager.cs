@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
         // End of the game || From Tutorial to Victory
         if (activeScene.name == levelData.VictoryScene)
         {
-            if (levelData.CurrenLevelIndex == 3 || levelData.IsTutorialRun)
+            if (levelData.GetLastLevelName == levelData.BossScene || levelData.IsTutorialRun)
             {
                 disableAbleButton.SetActive(false); // Next button
                 menuButton.SetActive(true); // Menu button

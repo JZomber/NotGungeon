@@ -25,7 +25,7 @@ public class SelectedCharacter : ScriptableObject
         isCharacterSelected = true;
     }
 
-    public void ResetCharacterSetup()
+    public void GetLastSelectedCharacter()
     {
         animatorController = null;
         maxLife = 0;
