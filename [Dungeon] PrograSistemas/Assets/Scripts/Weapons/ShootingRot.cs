@@ -4,26 +4,22 @@ namespace Weapons
 {
     public class ShootingRot : MonoBehaviour
     {
-        // Start is called before the first frame update
         private Camera mainCam;
         private Vector3 mousePos;
 
         private GameObject target;
-        [SerializeField] GameObject user;
-        [SerializeField] GameObject weapon;
+        [SerializeField] private GameObject user;
+        [SerializeField] private GameObject weapon;
 
         private bool isRotated180 = false;
 
-        void Start()
+        private void Start()
         {
             mainCam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        
             target = GameObject.FindGameObjectWithTag("Player");
-
-            
         }
 
-        void Update()
+        private void Update()
         {
             if (user.CompareTag("Player"))
             {
@@ -35,7 +31,6 @@ namespace Weapons
                 {
                     if (!isRotated180)
                     {
-                        // Rota el objeto secundario en el eje X a 180 grados
                         weapon.transform.localRotation = Quaternion.Euler(180, weapon.transform.localRotation.y, weapon.transform.localRotation.z);
                         isRotated180 = true;
                     }
@@ -44,7 +39,6 @@ namespace Weapons
                 {
                     if (isRotated180)
                     {
-                        // Rota el objeto secundario en el eje X a 0 grados
                         weapon.transform.localRotation = Quaternion.Euler(0, weapon.transform.localRotation.y, weapon.transform.localRotation.z);
                         isRotated180 = false;
                     }
@@ -61,7 +55,6 @@ namespace Weapons
                 {
                     if (!isRotated180)
                     {
-                        // Rota el objeto secundario en el eje X a 180 grados
                         weapon.transform.localRotation = Quaternion.Euler(180, weapon.transform.localRotation.y, weapon.transform.localRotation.z);
                         isRotated180 = true;
                     }
@@ -70,15 +63,11 @@ namespace Weapons
                 {
                     if (isRotated180)
                     {
-                        // Rota el objeto secundario en el eje X a 0 grados
                         weapon.transform.localRotation = Quaternion.Euler(0, weapon.transform.localRotation.y, weapon.transform.localRotation.z);
                         isRotated180 = false;
                     }
                 }
             }
         }
-
-        
-
     }
 }

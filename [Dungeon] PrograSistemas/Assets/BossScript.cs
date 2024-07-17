@@ -26,8 +26,8 @@ public class BossScript : MonoBehaviour
         enemyScript = GetComponent<EnemyScript>();
         rangedEnemy = GetComponent<RangedEnemy>();
         
-        maxHealth = enemyScript.health;
-        previousHealth = enemyScript.health;
+        maxHealth = enemyScript.GetHealth;
+        previousHealth = enemyScript.GetHealth;
         isHalfLife = false;
         rangedEnemy.isWeaponActive = false;
     }

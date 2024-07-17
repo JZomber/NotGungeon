@@ -16,19 +16,18 @@ public class WeaponManager : MonoBehaviour
     
     private void Update()
     {
-        // Capturar el input de la rueda del rat�n
+        // Scroll wheel input
         scrollInput += Input.GetAxis("Mouse ScrollWheel");
-
-        // Si el input es mayor que la sensibilidad, cambiar arma
+        
         if (scrollInput >= scrollSensitivity)
         {
             NextWeapon();
-            scrollInput = 0f; // Reiniciar el input despu�s de cambiar de arma
+            scrollInput = 0f;
         }
         else if (scrollInput <= -scrollSensitivity)
         {
             PreviousWeapon();
-            scrollInput = 0f; // Reiniciar el input despu�s de cambiar de arma
+            scrollInput = 0f;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) 

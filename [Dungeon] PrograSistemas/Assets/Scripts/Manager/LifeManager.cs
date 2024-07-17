@@ -71,7 +71,7 @@ public class LifeManager : MonoBehaviour
 
         if (currentLife <= 0)
         {
-            player.GetComponent<PlayerMov>().isDead = true;
+            player.GetComponent<PlayerMov>().SetPlayerIsDead();
             player.GetComponent<Animator>().SetTrigger("isDead");
             player.GetComponent<PlayerShoot>().canShoot = false;
 

@@ -8,13 +8,12 @@ namespace Weapons
 {
     public class BulletScript : MonoBehaviour
     {
-        public float speed;
+        [SerializeField] private float speed;
         private Rigidbody2D rb;
 
-        public bool targetEnemy = true;
+        [SerializeField] private bool targetEnemy = true;
     
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             rb = GetComponent<Rigidbody2D>();
             rb.velocity = transform.up * speed;
@@ -27,7 +26,7 @@ namespace Weapons
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (targetEnemy && collision.CompareTag("Enemy")) //Si la bala colisiona Enemy y es un objetivo del mismo
+            if (targetEnemy && collision.CompareTag("Enemy"))
             {
                 EnemyScript enemy = collision.GetComponent<EnemyScript>();
 
@@ -50,19 +49,19 @@ namespace Weapons
                 Deactive();
             }
 
-            if (!targetEnemy && collision.CompareTag("Shield")) //Si la bala colisiona con un escudo y Enemy no es objetivo
+            if (!targetEnemy && collision.CompareTag("Shield"))
             {
                 var shield = collision.gameObject.GetComponent<ShieldPowerUp>();
                 shield.TakeDamage(1);
                 Deactive();
             }
 
-            if (collision.CompareTag("Wall") || !targetEnemy && collision.CompareTag("Player")) //Colisión con una pared o player
+            if (collision.CompareTag("Wall") || !targetEnemy && collision.CompareTag("Player"))
             {
                 Deactive();
             }
         }
-        void Deactive()
+        private void Deactive()
         {
             gameObject.SetActive(false);
         }
