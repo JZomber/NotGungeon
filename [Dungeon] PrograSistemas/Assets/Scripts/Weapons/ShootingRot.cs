@@ -10,7 +10,9 @@ namespace Weapons
 
         private GameObject target;
         [SerializeField] GameObject user;
-       
+        [SerializeField] GameObject weapon;
+
+        private bool isRotated180 = false;
 
         void Start()
         {
@@ -29,13 +31,50 @@ namespace Weapons
                 Vector3 rotation = mousePos - transform.position;
                 float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0, 0, rotZ);
-                
+                if (Mathf.Abs(rotZ) > 90 && weapon != null)
+                {
+                    if (!isRotated180)
+                    {
+                        // Rota el objeto secundario en el eje X a 180 grados
+                        weapon.transform.localRotation = Quaternion.Euler(180, weapon.transform.localRotation.y, weapon.transform.localRotation.z);
+                        isRotated180 = true;
+                    }
+                }
+                else
+                {
+                    if (isRotated180)
+                    {
+                        // Rota el objeto secundario en el eje X a 0 grados
+                        weapon.transform.localRotation = Quaternion.Euler(0, weapon.transform.localRotation.y, weapon.transform.localRotation.z);
+                        isRotated180 = false;
+                    }
+                }
+
             }
             else if (user.CompareTag("Enemy"))
             {
                 Vector3 rotation = target.transform.position - transform.position;
                 float rotZ = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
                 transform.rotation = Quaternion.Euler(0, 0, rotZ);
+
+                if (Mathf.Abs(rotZ) > 90 && weapon != null)
+                {
+                    if (!isRotated180)
+                    {
+                        // Rota el objeto secundario en el eje X a 180 grados
+                        weapon.transform.localRotation = Quaternion.Euler(180, weapon.transform.localRotation.y, weapon.transform.localRotation.z);
+                        isRotated180 = true;
+                    }
+                }
+                else
+                {
+                    if (isRotated180)
+                    {
+                        // Rota el objeto secundario en el eje X a 0 grados
+                        weapon.transform.localRotation = Quaternion.Euler(0, weapon.transform.localRotation.y, weapon.transform.localRotation.z);
+                        isRotated180 = false;
+                    }
+                }
             }
         }
 
