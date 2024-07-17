@@ -7,16 +7,19 @@ using static Cinemachine.AxisState;
 public class PlayerMov : MonoBehaviour
 {
     [SerializeField] private float speedMov;
-    [SerializeField] private Animator animator; //private Animator animator;
+    [SerializeField] private Animator animator;
     public bool isDead = false;
 
     public event Action OnPlayerVictory;
-    
+
+    private bool facingRight = true;
+    private SpriteRenderer sprite;
+
     // Start is called before the first frame update
     void Start()
     {
         Time.timeScale = 1;
-        // animator = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -27,25 +30,39 @@ public class PlayerMov : MonoBehaviour
             float inputX = Input.GetAxisRaw("Horizontal");
             float inputY = Input.GetAxisRaw("Vertical");
 
-            transform.position += new Vector3(inputX* speedMov * Time.deltaTime, inputY* speedMov * Time.deltaTime,0);
-            
-            if (inputY > 0 || inputY < 0)
+            transform.position += new Vector3(inputX * speedMov * Time.deltaTime, inputY * speedMov * Time.deltaTime, 0);
+
+            if (inputX > 0 && !facingRight)
             {
-                animator.SetBool("isRunning", true); // Condici�n para la transici�n
-                animator.SetFloat("Speed", Mathf.Abs(inputY)); //Independientemente del input, siempre da positivo
+                Flip();
             }
-            else if (inputX > 0 || inputX < 0)
+            else if (inputX < 0 && facingRight)
+            {
+                Flip();
+            }
+
+            if (inputY != 0)
+            {
+                animator.SetBool("isRunning", true);
+                animator.SetFloat("Speed", Mathf.Abs(inputY));
+            }
+            else if (inputX != 0)
             {
                 animator.SetBool("isRunning", true);
                 animator.SetFloat("Speed", Mathf.Abs(inputX));
             }
             else
             {
-                //Vuelve a "Idle"
                 animator.SetBool("isRunning", false);
                 animator.SetFloat("Speed", 0);
             }
         }
+    }
+
+    private void Flip()
+    {
+        facingRight = !facingRight;
+        sprite.flipX = !sprite.flipX;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
