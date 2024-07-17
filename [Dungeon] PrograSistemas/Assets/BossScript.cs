@@ -13,6 +13,7 @@ public class BossScript : MonoBehaviour
     [SerializeField] GameObject doors;
     RangedEnemy rangedEnemy;
     float maxHealth;
+    float previousHealth;
     bool isHalfLife;
     bool isSecondBase = false;
 
@@ -23,6 +24,7 @@ public class BossScript : MonoBehaviour
         enemyScript = GetComponent<EnemyScript>();
         rangedEnemy = GetComponent<RangedEnemy>();
         maxHealth = enemyScript.health;
+        previousHealth = enemyScript.health;
         isHalfLife = false;
         rangedEnemy.isWeaponActive = false;
     }
@@ -41,7 +43,14 @@ public class BossScript : MonoBehaviour
                 {
                     enemys[i].SetActive(true);
                 }
-            } 
+            }
+
+            float currentHealth = enemyScript.GetCurrentHealth;
+            if (currentHealth < previousHealth)
+            {
+                ActiveBoss();
+            }
+            previousHealth = currentHealth;
 
             if (isHalfLife) 
             {
