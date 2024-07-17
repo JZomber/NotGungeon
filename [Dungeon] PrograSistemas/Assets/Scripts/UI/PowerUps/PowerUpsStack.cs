@@ -10,7 +10,7 @@ namespace UI.PowerUps
     {
         private Stack<PowerUpData> powerUpsStack = new Stack<PowerUpData>(); //Cola de powerUps
         private int maxSize = 3; // Tamaño del array
-        [SerializeField] private PowerUpData currentPowerUp;
+        public PowerUpData currentPowerUp;
         
         private LoadCharacterData loadCharacterData;
         private LevelManager levelManager;

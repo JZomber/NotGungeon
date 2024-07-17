@@ -8,19 +8,21 @@ public class PlayerMov : MonoBehaviour
 {
     [SerializeField] private float speedMov;
     [SerializeField] private Animator animator;
-    private bool isDead = false;
-    
-    private bool facingRight = true;
-    private SpriteRenderer sprite;
-    
+    public bool isDead = false;
+
     public event Action OnPlayerVictory;
 
-    private void Start()
+    private bool facingRight = true;
+    private SpriteRenderer sprite;
+
+    // Start is called before the first frame update
+    void Start()
     {
         Time.timeScale = 1;
         sprite = GetComponent<SpriteRenderer>();
     }
 
+    // Update is called once per frame
     void Update()
     {
         if (!isDead)
@@ -55,11 +57,6 @@ public class PlayerMov : MonoBehaviour
                 animator.SetFloat("Speed", 0);
             }
         }
-    }
-
-    public void SetPlayerIsDead()
-    {
-        isDead = true;
     }
 
     private void Flip()

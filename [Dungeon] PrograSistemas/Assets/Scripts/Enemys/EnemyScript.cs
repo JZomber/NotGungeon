@@ -6,34 +6,35 @@ using UnityEngine.Events;
 public class EnemyScript : MonoBehaviour
 {
     [Header("Enemy Attributes")]
-    [SerializeField] private float health;
+    public float health;
     private float currentHealth;
-    [SerializeField] private float speed;
-    [SerializeField] private bool isAlive = true;
+    public float speed;
+    public bool isAlive = true;
     private float damageCooldownTime = 0.1f;
     private bool canTakeDamage = true;
-    [SerializeField] private bool isRangedEnemy;
+    public bool isRangedEnemy;
     private Animator animator;
     private CapsuleCollider2D capsuleCollider2D;
 
-    public float GetHealth => health;
     public float GetCurrentHealth => currentHealth;
 
     [Header("Player")]
-    [SerializeField] private GameObject player;
+    public GameObject player;
     private float distance;
 
     private RangedEnemy rangedEnemy;
+    //private SoundManager soundManager; // Referencia al SoundManager
     private EnemyManager enemyManager;
 
     public event Action<GameObject> OnEnemyKilled;
     public event Action OnEnemyRevived;
-    [SerializeField] private bool isFaceRight;
+    public bool isFaceRight;
 
 
     private void Start()
     {
         EnemySetup();
+        //soundManager = SoundManager.Instance; // Obtener instancia del SoundManager
         if (player)
         {
             if (player.transform.position.x > transform.position.x && isFaceRight)
@@ -48,11 +49,11 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private void Update()
+    void Update()
     {
         if (player)
         {
-            // Chase player
+            // Perseguir al Jugador
             distance = Vector2.Distance(transform.position, player.transform.position);
 
             if (distance < 20)
@@ -62,9 +63,9 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private void Flip()
+    void Flip()
     {
-        // Flip rotation on Y
+        // Invierte la rotación en el eje Y
         
         if (transform.rotation.y >= 180)
         {
@@ -123,6 +124,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    // Daño del Enemigo
     public void EnemyDamage(float damage)
     {
         if (isAlive && canTakeDamage)
@@ -139,6 +141,12 @@ public class EnemyScript : MonoBehaviour
                 animator.SetTrigger("isDead");
 
                 OnEnemyKilled?.Invoke(this.gameObject);
+
+                // Reproducir el sonido de muerte del enemigo
+                // if (soundManager != null)
+                // {
+                //     soundManager.PlayEnemySkeletonDeathSound();
+                // }
 
                 if (isRangedEnemy && gameObject.activeInHierarchy)
                 {
@@ -165,6 +173,12 @@ public class EnemyScript : MonoBehaviour
 
             OnEnemyKilled?.Invoke(gameObject);
 
+            // Reproducir el sonido de muerte del enemigo
+            // if (soundManager != null)
+            // {
+            //     soundManager.PlayEnemySkeletonDeathSound();
+            // }
+
             if (isRangedEnemy)
             {
                 rangedEnemy.canShoot = false;
@@ -182,6 +196,7 @@ public class EnemyScript : MonoBehaviour
             currentHealth = health;
             animator.SetTrigger("isRevived");
             animator.SetBool("isAlive", isAlive);
+            //SoundManager.Instance.PlayEnemyReviveSound();
 
             if (isRangedEnemy)
             {

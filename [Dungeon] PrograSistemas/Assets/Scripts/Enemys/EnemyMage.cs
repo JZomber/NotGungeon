@@ -6,9 +6,9 @@ using UnityEngine;
 public class EnemyMage : MonoBehaviour
 {
     [Header("Enemy Attributes")]
-    [SerializeField] private int health;
+    public int health;
     private int currentHealth;
-    [SerializeField] private bool isAlive;
+    public bool isAlive;
     [SerializeField] private Animator animator;
     [SerializeField] private GameObject enemyShield;
     private float damageCooldownTime = 0.1f;
@@ -22,7 +22,8 @@ public class EnemyMage : MonoBehaviour
 
     public event Action<GameObject> OnMageKilled;
 
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
         EnemySetup();
     }
@@ -114,7 +115,7 @@ public class EnemyMage : MonoBehaviour
         }
     }
 
-    private void UpdateColliders() // Controls when the necromancer can be damaged
+    private void UpdateColliders() // Controla cuando el mago/necro es vulnerable o no
     {
         if (!isReviving && isAlive)
         {
@@ -157,6 +158,9 @@ public class EnemyMage : MonoBehaviour
             enemyShield.SetActive(isAlive);
             animator.SetBool("isAlive", isAlive);
             animator.SetTrigger("isDead");
+
+            // Reproduce el sonido de muerte del enemigo esqueleto
+            //SoundManager.Instance.PlayEnemySkeletonDeathSound();
 
             OnMageKilled?.Invoke(gameObject);
             enemyManager.OnMageCalled -= HandlerGetNewTarget;

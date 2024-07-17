@@ -56,7 +56,7 @@ public class UserInterfaceManager : MonoBehaviour
         }
     }
 
-    private void Start()
+    void Start()
     {
         defaultPowerUpSprite = powerUpUI.sprite;
 
@@ -94,7 +94,7 @@ public class UserInterfaceManager : MonoBehaviour
         if (heartStack.Count > 0)
         {
             Image heartToRemove = heartStack.Pop();
-            lostHeartPositions.Add(heartToRemove.transform.localPosition); // Saves position of lost hearts
+            lostHeartPositions.Add(heartToRemove.transform.localPosition); // Guarda la posición del corazón perdido
             heartToRemove.gameObject.SetActive(false);
             Destroy(heartToRemove.gameObject);
         }

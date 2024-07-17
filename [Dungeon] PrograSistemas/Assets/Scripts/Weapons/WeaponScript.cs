@@ -6,14 +6,16 @@ using UnityEngine.Events;
 
 public class WeaponScript : MonoBehaviour,IGun
 {
-    [SerializeField] private WeaponData weaponData;
-    private SpriteRenderer spriteRenderer;
-    private AudioSource myAudio;
-    private List<GameObject> bullets = new List<GameObject>();
-    private int poolSize = 3;
-    private bool isShooting = false;
+    [SerializeField] WeaponData weaponData;
+    SpriteRenderer spriteRenderer;
+    AudioSource myAudio;
+    List<GameObject> bullets = new List<GameObject>();
+    int poolSize = 3;
 
     public UnityEvent OnShoot = new UnityEvent();
+
+    private bool isShooting = false; // Bandera para controlar el estado de disparo
+
     public event Action<Sprite> OnSpriteChanged;
     
     private void Start()
@@ -38,7 +40,7 @@ public class WeaponScript : MonoBehaviour,IGun
 
     public void Shoot(Transform orig)
     {
-        if (!isShooting)
+        if (!isShooting) // Solo disparar si no se est� disparando actualmente
         {
             if (weaponData.GetBulletsPerShoot > 1) 
             {
@@ -57,7 +59,7 @@ public class WeaponScript : MonoBehaviour,IGun
                     bullet.transform.rotation = orig.rotation * Quaternion.Euler(0, 0, -90);
                     bullet.SetActive(true);
                 }
-                
+
                 OnShoot.Invoke();
                  PutShootSound();
             }
@@ -66,7 +68,7 @@ public class WeaponScript : MonoBehaviour,IGun
 
     public void ShootShotgun(Transform orig)
     {
-        if (!isShooting)
+        if (!isShooting) // Solo disparar si no se est� disparando actualmente
         {
             StartCoroutine(ShootShotgunCoroutine(orig));
         }
@@ -74,7 +76,7 @@ public class WeaponScript : MonoBehaviour,IGun
 
     private IEnumerator ShootShotgunCoroutine(Transform orig)
     {
-        isShooting = true;
+        isShooting = true; // Establecer la bandera a true para indicar que est� disparando
 
         float angleStep = weaponData.GetSpreadAngle / (weaponData.GetBulletsPerShoot - 1);
         float angle = -weaponData.GetSpreadAngle / 2;
@@ -90,12 +92,13 @@ public class WeaponScript : MonoBehaviour,IGun
             }
             angle += angleStep;
         }
+
         PutShootSound();
 
         OnShoot.Invoke();
-        yield return new WaitForSeconds(weaponData.GetCadency);
+        yield return new WaitForSeconds(weaponData.GetCadency); // Espera para la cadencia de disparo
 
-        isShooting = false;
+        isShooting = false; // Restablecer la bandera a false para indicar que ha terminado de disparar
     }
 
     private GameObject GetPooledBullet()
@@ -115,9 +118,9 @@ public class WeaponScript : MonoBehaviour,IGun
 
     private IEnumerator ShootSmg(float delay, Transform orig)
     {
-        isShooting = true; 
+        isShooting = true; // Establecer la bandera a true para indicar que est� disparando
 
-        for (int i = 0; i < weaponData.GetRoundsBullets; i++)
+        for (int i = 0; i < weaponData.GetRoundsBullets; i++) // Cantidad de veces que disparar� el arma (3 disparos - efecto r�faga)
         {
             GameObject bullet = GetPooledBullet();
             if (bullet != null)
@@ -133,11 +136,12 @@ public class WeaponScript : MonoBehaviour,IGun
             yield return new WaitForSeconds(delay);
         }
         
-        isShooting = false;
+        isShooting = false; // Restablecer la bandera a false para indicar que ha terminado de disparar
     }
 
     public void ChangeWeaponSprite() 
     {
+    
         if(spriteRenderer != null && weaponData != null) 
         {
             spriteRenderer.sprite = weaponData.GetWeaponSprite;
@@ -152,6 +156,7 @@ public class WeaponScript : MonoBehaviour,IGun
         { 
             myAudio.PlayOneShot(weaponData.GetReloadSound); 
         }   
+
     }
 
     public void PutShootSound() 
@@ -160,6 +165,7 @@ public class WeaponScript : MonoBehaviour,IGun
         {
             myAudio.PlayOneShot(weaponData.GetShotSound);
         }
+
     }
 
     public void ChangeWeaponData(WeaponData weaponData) 

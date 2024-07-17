@@ -61,7 +61,7 @@ public class EnemyManager : MonoBehaviour
     }
     
     // Start is called before the first frame update
-    private void Start()
+    void Start()
     {
         modularRooms = FindObjectsOfType<ModularRooms>();
 

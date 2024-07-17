@@ -5,17 +5,17 @@ using UnityEngine;
 
 public class StopTime : MonoBehaviour
 {
-    [SerializeField] private KeyCode timeControlKey = KeyCode.Q; // Input
-    [SerializeField] private float slowMotionDuration = 2f; // Power's duration
-    [SerializeField] private float cooldownTime = 5f; // Power's Cooldown
-    [SerializeField] private float slowMotionScale = 0.5f;
-    [SerializeField] private GameObject powerIndicator;
+    public KeyCode timeControlKey = KeyCode.Q; // Tecla para activar el poder
+    public float slowMotionDuration = 2f; // Duración del efecto de ralentización
+    public float cooldownTime = 5f; // Tiempo de espera antes de poder usar el poder nuevamente
+    public float slowMotionScale = 0.5f; // Escala de tiempo para el efecto de ralentización
 
-    private bool isCooldown = false;
-    private bool isSlowMotionActive = false;
+    private bool isCooldown = false; // Bandera para verificar si está en cooldown
+    private bool isSlowMotionActive = false; // Bandera para verificar si el efecto está activo
 
+    public GameObject powerIndicator; // Referencia al objeto de la UI que indica la disponibilidad del poder
 
-    private void Update()
+    void Update()
     {
         if (Input.GetKeyDown(timeControlKey) && !isCooldown && !isSlowMotionActive)
         {
@@ -23,33 +23,33 @@ public class StopTime : MonoBehaviour
         }
     }
 
-    private IEnumerator SlowMotionCoroutine()
+    IEnumerator SlowMotionCoroutine()
     {
         isSlowMotionActive = true;
-        Time.timeScale = slowMotionScale;
-        UpdatePowerIndicator(false);
+        Time.timeScale = slowMotionScale; // Activar el efecto de ralentización
+        UpdatePowerIndicator(false); // Actualizar el indicador UI
 
-        yield return new WaitForSecondsRealtime(slowMotionDuration);
+        yield return new WaitForSecondsRealtime(slowMotionDuration); // Esperar la duración del efecto en tiempo real
 
-        Time.timeScale = 1f;
+        Time.timeScale = 1f; // Reanudar el tiempo normal
         isSlowMotionActive = false;
 
-        StartCoroutine(CooldownCoroutine());
+        StartCoroutine(CooldownCoroutine()); // Iniciar el cooldown
     }
 
-    private IEnumerator CooldownCoroutine()
+    IEnumerator CooldownCoroutine()
     {
-        isCooldown = true;
-        yield return new WaitForSeconds(cooldownTime);
-        isCooldown = false;
-        UpdatePowerIndicator(true);
+        isCooldown = true; // Establecer la bandera de cooldown
+        yield return new WaitForSeconds(cooldownTime); // Esperar el tiempo de cooldown
+        isCooldown = false; // Reiniciar la bandera de cooldown
+        UpdatePowerIndicator(true); // Actualizar el indicador UI
     }
 
-    private void UpdatePowerIndicator(bool isActive)
+    void UpdatePowerIndicator(bool isActive)
     {
         if (powerIndicator != null)
         {
-            powerIndicator.SetActive(isActive);
+            powerIndicator.SetActive(isActive); // Activar o desactivar el indicador UI dependiendo de si hay usos disponibles
         }
     }
 }

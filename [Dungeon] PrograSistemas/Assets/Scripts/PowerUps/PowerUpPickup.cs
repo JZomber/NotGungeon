@@ -8,11 +8,9 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class PowerUpPickup : MonoBehaviour
 {
-    [SerializeField] private PowerUpData powerUpData;
+    [SerializeField] public PowerUpData powerUpData;
     [SerializeField] private Sprite defaultIcon;
     private SpriteRenderer spriteRenderer;
-
-    public PowerUpData GetPowerUpData => powerUpData;
     public event Action<PowerUpData> OnCollected;
 
     private void Start()

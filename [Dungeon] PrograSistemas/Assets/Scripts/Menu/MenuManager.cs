@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private Animator transition;
+    public Animator transition;
     [SerializeField] private LevelData levelData;
     [SerializeField] private GameObject disableAbleButton;
     [SerializeField] private GameObject menuButton;

@@ -7,11 +7,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private Transform shootingOrig;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private GameObject weapon;
-    private WeaponScript weaponScript;
-    private StopTime stopTime;
+    [SerializeField] Transform shootingOrig; //Origen de las balas
+    [SerializeField] GameObject bulletPrefab; //Prefab de las balas (player)
+    [SerializeField] GameObject weapon;
+    WeaponScript weaponScript;
+
+    StopTime stopTime;
+
+    public bool isPowerActive; //Poder de disparo
+    private float timePowerUp = 6f; //Duraci�n del power up
+
     public bool canShoot = true;
     
 
@@ -26,29 +31,58 @@ public class PlayerShoot : MonoBehaviour
         }
     }
 
+    // Update is called once per frame
     void Update()
     {
-        if (Mouse.current.leftButton.wasPressedThisFrame && canShoot)
+        if (isPowerActive) //Si el poder est� activo
         {
-            if (weaponScript != null)
+            var dt = Time.deltaTime;
+            timePowerUp -= dt;
+            
+            if (timePowerUp <= 0f)
             {
-                weaponScript.Shoot(shootingOrig);
+                isPowerActive = false;
+                timePowerUp = 6f;
+                //Debug.LogError("Power Shoot desactivado");
             }
+        } 
+            
+        if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
+        {
+                if (weaponScript != null)
+                {
+                    weaponScript.Shoot(shootingOrig);
+                }
+                //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
         }
         else 
         {
-            if (Mouse.current.leftButton.wasPressedThisFrame && canShoot)
+            if (Mouse.current.leftButton.wasPressedThisFrame && canShoot) //Cada vez que se presione el mouse
             {
                 if (weaponScript != null)
                 {
                     weaponScript.Shoot(shootingOrig);
                 }
+                //StartCoroutine(PlayerShooting(bulletPrefab, shootingOrig, 0.15f)); //Prefab, Origen, Delay
             }
         }
         
         if (!canShoot)
         {
-            weapon.GameObject().SetActive(false);
+         weapon.GameObject().SetActive(false);
+        }
+    }
+
+    private IEnumerator PlayerShooting(GameObject prefab, Transform orig, float delay)
+    {
+        var rotation = orig.rotation;
+        rotation *=  Quaternion.Euler(0, 0, -90);
+        Instantiate(prefab, orig.position, rotation);
+            
+        if (isPowerActive) //Si el poder est� activo, instancia otra bala
+        {
+            yield return new WaitForSeconds(delay);
+            Instantiate(prefab, orig.position, rotation);
         }
     }
 }
