@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -9,9 +10,13 @@ public class EnemyScript : MonoBehaviour
     private float currentHealth;
     public float speed;
     public bool isAlive = true;
+    private float damageCooldownTime = 0.2f;
+    private bool canTakeDamage = true;
     public bool isRangedEnemy;
     private Animator animator;
     private CapsuleCollider2D capsuleCollider2D;
+
+    public float GetCurrentHealth => currentHealth;
 
     [Header("Player")]
     public GameObject player;
@@ -23,11 +28,25 @@ public class EnemyScript : MonoBehaviour
 
     public event Action<GameObject> OnEnemyKilled;
     public event Action OnEnemyRevived;
+    public bool isFaceRight;
+
 
     private void Start()
     {
         EnemySetup();
         //soundManager = SoundManager.Instance; // Obtener instancia del SoundManager
+        if (player)
+        {
+            if (player.transform.position.x > transform.position.x && isFaceRight)
+            {
+                Flip();
+            }
+
+            if (player.transform.position.x < transform.position.x && !isFaceRight)
+            {
+                Flip();
+            }
+        }
     }
 
     void Update()
@@ -41,6 +60,22 @@ public class EnemyScript : MonoBehaviour
             {
                 transform.position = Vector2.MoveTowards(this.transform.position, player.transform.position, speed * Time.deltaTime);
             }
+        }
+    }
+
+    void Flip()
+    {
+        // Invierte la rotación en el eje Y
+        
+        if (transform.rotation.y >= 180)
+        {
+            isFaceRight = false;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + 180f, transform.rotation.eulerAngles.z);
+        }
+        else 
+        {
+            isFaceRight = true;
+            transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y - 180f, transform.rotation.eulerAngles.z);
         }
     }
 
@@ -59,7 +94,6 @@ public class EnemyScript : MonoBehaviour
             enemyManager.OnEnemyDespawn += HandlerEnemyDespawn;
         }
         
-
         if (capsuleCollider2D == null)
         {
             capsuleCollider2D = gameObject.GetComponent<CapsuleCollider2D>();
@@ -70,6 +104,11 @@ public class EnemyScript : MonoBehaviour
         if (animator == null)
         {
             animator = gameObject.GetComponent<Animator>();
+            animator.SetBool("isAlive", isAlive);
+        }
+        else
+        {
+            animator.SetBool("isAlive", isAlive);
         }
 
         if (isRangedEnemy)
@@ -88,14 +127,17 @@ public class EnemyScript : MonoBehaviour
     // Daño del Enemigo
     public void EnemyDamage(float damage)
     {
-        if (isAlive)
+        if (isAlive && canTakeDamage)
         {
             currentHealth -= damage;
+            canTakeDamage = false;
+            StartCoroutine(ResetDamageCooldown());
 
             if (currentHealth <= 0)
             {
                 isAlive = false;
                 capsuleCollider2D.enabled = false;
+                animator.SetBool("isAlive", isAlive);
                 animator.SetTrigger("isDead");
 
                 OnEnemyKilled?.Invoke(this.gameObject);
@@ -113,6 +155,10 @@ public class EnemyScript : MonoBehaviour
                     StartCoroutine(rangedEnemy.UpdateWeaponStatus(0f));
                 }
             }
+            else 
+            {
+                animator.SetTrigger("Damaged");
+            }
         }
     }
 
@@ -120,9 +166,10 @@ public class EnemyScript : MonoBehaviour
     {
         if (other.CompareTag("Shield"))
         {
-            capsuleCollider2D.enabled = false;
-            animator.SetTrigger("isDead");
             isAlive = false;
+            capsuleCollider2D.enabled = false;
+            animator.SetBool("isAlive", isAlive);
+            animator.SetTrigger("isDead");
 
             OnEnemyKilled?.Invoke(gameObject);
 
@@ -148,6 +195,7 @@ public class EnemyScript : MonoBehaviour
             isAlive = true;
             currentHealth = health;
             animator.SetTrigger("isRevived");
+            animator.SetBool("isAlive", isAlive);
             //SoundManager.Instance.PlayEnemyReviveSound();
 
             if (isRangedEnemy)
@@ -156,7 +204,6 @@ public class EnemyScript : MonoBehaviour
                 StartCoroutine(rangedEnemy.UpdateWeaponStatus(1f));
                 StartCoroutine(RangedReset(1.5f));
             }
-
             OnEnemyRevived?.Invoke();
         }
     }
@@ -165,6 +212,12 @@ public class EnemyScript : MonoBehaviour
     {
         animator.SetTrigger("despawn");
         enemyManager.OnEnemyDespawn -= HandlerEnemyDespawn;
+    }
+
+    private IEnumerator ResetDamageCooldown()
+    {
+        yield return new WaitForSeconds(damageCooldownTime);
+        canTakeDamage = true;
     }
 
     private IEnumerator RangedReset(float delay)
